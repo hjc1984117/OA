@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-账号管理</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+    	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加人员信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注: 标有<span style="color: red;">*</span>符号的字段为必填项
+                        </div>
+                        <form id="add_account_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="username">姓名<span style="color: red;">*</span></label>
+                                    <div class="col-md-5">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" readonly="" name="username" id="username" placeholder="员工姓名" aria-required="true" aria-invalid="false"/>
+                                            <input type="hidden" name="userid" id="userid"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="channel">负责账户<span style="color: red;">*</span></label>
+                                    <div class="col-md-8">
+                                    	<div class="input-icon right">
+	                                        <i class="fa"></i>
+	                                    	<input type="hidden" name="selectchannels" id="selectchannels" value="" aria-required="true" aria-invalid="false">
+                                       	</div>
+                                        <div class="input-icon right" id="channelaccounts">
+                                        	 <i class="fa"></i>
+                                        </div>
+                                    </div>       
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">推广统计</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">人员管理</a></li>
+            </ul>
+        </div>
+        <!-- data-target is murder content id -->
+   	     <div class="permit_buttons">
+            <button data-target="#myModal" data-toggle="modal" class="btn red-sunglo permit_3070301" id="open_dialog_btn" type="button"><i class="fa fa-plus"></i>添加人员信息</button>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i> 人员信息列表  
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                               
+                                <th sort='created'>添加时间</th>
+                                <th sort='nickname'>姓名</th>
+                                <th>负责账户</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:salecountList">
+                            <tr>
+                                <td data-bind="text:created"></td>
+                                <td data-bind="text:nickname"></td>
+                                <td data-bind="text:accounts" style="text-align:left;"></td>
+                                <td data-bind="attr:{'id':'customer_td_'+id}">
+                                    <!--ko if:dele-->
+                                    <span data-bind="click:$root.delSalecount,attr:{'val':id}" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:edit-->
+                                    <span  data-bind="click:$root.editSalecount,attr:{'val':id}" aria-hidden="true" class="icon-note data_list_div" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <div class="dataLog_detail" data-bind="attr:{'id':'dataLog_detail_'+id}">
+                                        <img src="../../assets/global/img/input-spinner.gif" style="margin-top: 130px">
+                                    </div>
+                                    <!-- /ko -->
+                                    <!--ko if:show-->
+                                    <span data-bind="click:$root.showSalecount" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                            	<td colspan="1"></td>
+                                <td colspan="2">
+                                    <form class="subform" data-bind="attr:{'id':'form_'+id}">
+                                        <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>名称：<span style="color: red;">*</span></th>
+                                                <td>
+                                                    <input type="text" class="form-control"  readonly="true" disabled="disabled" data-bind="value:nickname">
+                                                </td>
+                                            </tr>
+                                            <tr> 
+                                               	<th style="vertical-align: top;">管理账户:<span style="color: red;">*</span></th>
+	                                            <td class="ab" data-bind="attr:{'id':'accountlist_'+id,'data':caids}" align="left">
+	                                            </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn dept_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id,'val':id}">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="1"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+        	document.write("<script src='../../assets/local/basedatas.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sem/account-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sem/account.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html> 

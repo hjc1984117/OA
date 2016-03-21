@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-用餐检查</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/attusercheck_list.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" type="image/ico" href="../../assets/global/img/favicon.ico">
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">工作系统</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">用餐检查</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+        </div>
+        <div class="month_list">
+            <div class="month_items_list">
+                <input type="text" id="month_items" checkmore="true" value="">
+            </div>
+            <div class="month_tools">
+                <div class="month_tool_btn month_tool_btn_check_all">全选</div>
+                <div class="month_tool_btn month_tool_btn_uncheck_all">全不选</div>
+                <div class="month_tool_btn month_tool_btn_create">GO</div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-user-following"></i>
+                        用餐检查列表
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table " id="dataTable"><!--table-hover-->
+                        <thead>
+                            <tr>
+                                <th class="dy" rowspan="2">日期</th>
+                                <th class="username" rowspan="2">用户</th>
+                                <th class="dept" rowspan="2">部门</th>
+                            </tr>
+                            <tr></tr>
+                        </thead>
+                        <tbody data-bind="foreach:attusercheckList">
+                            <tr>
+                                <td style="white-space: pre !important;" class="date" data-bind="text:date">日期</td>
+                                <td style="white-space: pre !important;" class="username" data-bind="text:username">用户</td>
+                                <td style="white-space: pre !important;" class="dept" data-bind="text:dept">部门</td>
+                                <!-- ko if:fields.m_1 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma1,attr:{class:'m_1 bg_'+mac1}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn1,attr:{class:'m_1 bg_'+mnc1}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_2 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma2,attr:{class:'m_2 bg_'+mac2}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn2,attr:{class:'m_2 bg_'+mnc2}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_3 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma3,attr:{class:'m_3 bg_'+mac3}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn3,attr:{class:'m_3 bg_'+mnc3}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_4 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma4,attr:{class:'m_4 bg_'+mac4}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn4,attr:{class:'m_4 bg_'+mnc4}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_5 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma5,attr:{class:'m_5 bg_'+mac5}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn5,attr:{class:'m_5 bg_'+mnc5}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_6 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma6,attr:{class:'m_6 bg_'+mac6}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn6,attr:{class:'m_6 bg_'+mnc6}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_7 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma7,attr:{class:'m_7 bg_'+mac7}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn7,attr:{class:'m_7 bg_'+mnc7}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_8 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma8,attr:{class:'m_8 bg_'+mac8}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn8,attr:{class:'m_8 bg_'+mnc8}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_9 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma9,attr:{class:'m_9 bg_'+mac9}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn9,attr:{class:'m_9 bg_'+mnc9}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_10 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma10,attr:{class:'m_10 bg_'+mac10}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn10,attr:{class:'m_10 bg_'+mnc10}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_11 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma11,attr:{class:'m_11 bg_'+mac11}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn11,attr:{class:'m_11 bg_'+mnc11}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_12 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma12,attr:{class:'m_12 bg_'+mac12}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn12,attr:{class:'m_12 bg_'+mnc12}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_13 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma13,attr:{class:'m_13 bg_'+mac13}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn13,attr:{class:'m_13 bg_'+mnc13}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_14 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma14,attr:{class:'m_14 bg_'+mac14}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn14,attr:{class:'m_14 bg_'+mnc14}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_15 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma15,attr:{class:'m_15 bg_'+mac15}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn15,attr:{class:'m_15 bg_'+mnc15}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_16 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma16,attr:{class:'m_16 bg_'+mac16}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn16,attr:{class:'m_16 bg_'+mnc16}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_17 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma17,attr:{class:'m_17 bg_'+mac17}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn17,attr:{class:'m_17 bg_'+mnc17}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_18 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma18,attr:{class:'m_18 bg_'+mac18}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn18,attr:{class:'m_18 bg_'+mnc18}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_19 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma19,attr:{class:'m_19 bg_'+mac19}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn19,attr:{class:'m_19 bg_'+mnc19}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_20 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma20,attr:{class:'m_20 bg_'+mac20}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn20,attr:{class:'m_20 bg_'+mnc20}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_21 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma21,attr:{class:'m_21 bg_'+mac21}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn21,attr:{class:'m_21 bg_'+mnc21}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_22 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma22,attr:{class:'m_22 bg_'+mac22}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn22,attr:{class:'m_22 bg_'+mnc22}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_23 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma23,attr:{class:'m_23 bg_'+mac23}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn23,attr:{class:'m_23 bg_'+mnc23}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_24 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma24,attr:{class:'m_24 bg_'+mac24}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn24,attr:{class:'m_24 bg_'+mnc24}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_25 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma25,attr:{class:'m_25 bg_'+mac25}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn25,attr:{class:'m_25 bg_'+mnc25}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_26 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma26,attr:{class:'m_26 bg_'+mac26}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn26,attr:{class:'m_26 bg_'+mnc26}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_27 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma27,attr:{class:'m_27 bg_'+mac27}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn27,attr:{class:'m_27 bg_'+mnc27}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_28 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma28,attr:{class:'m_28 bg_'+mac28}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn28,attr:{class:'m_28 bg_'+mnc28}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_29 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma29,attr:{class:'m_29 bg_'+mac29}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn29,attr:{class:'m_29 bg_'+mnc29}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_30 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma30,attr:{class:'m_30 bg_'+mac30}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn30,attr:{class:'m_30 bg_'+mnc30}"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_31 -->
+                                <td style="white-space: pre !important;" data-bind="text:ma31,attr:{class:'m_31 bg_'+mac31}"></td>
+                                <td style="white-space: pre !important;" data-bind="text:mn31,attr:{class:'m_31 bg_'+mnc31}"></td>
+                                <!-- /ko-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/work/meals_table.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/work/meals_table.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

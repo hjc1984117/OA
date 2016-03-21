@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-域名管理</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">填写域名信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+
+                        <form id="add_domain_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="name">域名<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" name="name" id="name" placeholder="域名" title="多个域名请用','隔开"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="owner">域名所有者</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="owner" id="owner" placeholder="域名所有者"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="service">服务器</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="service" id="service" placeholder="服务器"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ipAddress">IP</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="ipAddress" id="ipAddress" placeholder="IP"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="dueDate">域名到期日期</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control selecter_datepicker" data-date-format="yyyy-mm-dd" readonly="" name="dueDate" id="dueDate" placeholder="域名到期日期"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">                                    
+                                    <label class="control-label col-md-2" for="useed">域名用途</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="useed" id="useed" placeholder="域名用途"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="isBurn">是否在烧</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="isBurn" id="isBurn" placeholder="是否在烧"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="recordPerson">备案人</label>
+                                    <div class="col-md-3" >
+                                        <input type="text" class="form-control not-clear" name="recordPerson" id="recordPerson" placeholder="备案人"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="recordSituation">备案情况</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="recordSituation" id="recordSituation" placeholder="备案情况"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="recordType">备案类型</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="recordType" id="recordType" placeholder="备案类型"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="nameType">域名类型</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="nameType" id="nameType" placeholder="域名类型"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="shengf">                                    
+                                    <label class="control-label col-md-2" for="nameBusiness">域名商</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="nameBusiness" id="nameBusiness" placeholder="域名商"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="buyAccount">购买账号</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="buyAccount" id="buyAccount" placeholder="购买账号"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="category">类别</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="category" id="category" placeholder="类别"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                            <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="searchModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">域名信息高级查询</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="search_domain_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="name">域名</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="域名"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="owner">域名所有者</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="owner" id="owner" placeholder="域名所有者"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="service">服务器</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="service" id="service" placeholder="服务器"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="ipAddress">IP</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="ipAddress" id="ipAddress" placeholder="IP"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">                                    
+                                    <label class="control-label col-md-2" for="dueDate">域名到期日期</label>
+                                    <div class="col-md-3">
+                                        <input type="text" style="width: 97px;font-size: 12px;float: left;" class="form-control selecter_datepicker" data-date-format="yyyy-mm-dd" readonly="" name="startDueDate" id="startDueDate" placeholder="开始日期"/>
+                                        <input type="text" style="width: 97px;font-size: 12px;float: left;border-left: none;" class="form-control selecter_datepicker" data-date-format="yyyy-mm-dd" readonly="" name="endDueDate" id="endDueDate" placeholder="结束日期"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="useed">域名用途</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="useed" id="useed" placeholder="域名用途"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="isBurn">是否在烧</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="isBurn" id="isBurn" placeholder="是否在烧"/>
+                                    </div>
+
+                                    <label class="control-label col-md-2" for="recordPerson">备案人</label>
+                                    <div class="col-md-3" >
+                                        <input type="text" class="form-control not-clear" name="recordPerson" id="recordPerson" placeholder="备案人"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="recordSituation">备案情况</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="recordSituation" id="recordSituation" placeholder="备案情况"/>
+                                    </div>
+
+                                    <label class="control-label col-md-2" for="recordType">备案类型</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="recordType" id="recordType" placeholder="备案类型"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="shengf">                                    
+                                    <label class="control-label col-md-2" for="nameType">域名类型</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="nameType" id="nameType" placeholder="域名类型"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="nameBusiness">域名商</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="nameBusiness" id="nameBusiness" placeholder="域名商"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="buyAccount">购买账号</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="buyAccount" id="buyAccount" placeholder="购买账号"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="category">类别</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="category" id="category" placeholder="类别"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_search_primary">查询</button>
+                            <button type="button" class="btn btn-primary" id="btn_toexcel_primary">Excel导出</button>
+                            <button type="button" class="btn btn-default" id="btn_search_close_primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">批量修改域名信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+
+                        <form id="edit_domain_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="name">域名<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <textarea class="form-control" readonly="" name="d_name" id="name" placeholder="域名" title="多个域名请用','隔开"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="owner">域名所有者</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="owner" id="owner" placeholder="域名所有者"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="service">服务器</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="service" id="service" placeholder="服务器"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ipAddress">IP</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="ipAddress" id="ipAddress" placeholder="IP"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="dueDate">域名到期日期</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control selecter_datepicker" data-date-format="yyyy-mm-dd" readonly="" name="dueDate" id="dueDate" placeholder="域名到期日期"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">                                    
+                                    <label class="control-label col-md-2" for="useed">域名用途</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="useed" id="useed" placeholder="域名用途"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="isBurn">是否在烧</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="isBurn" id="isBurn" placeholder="是否在烧"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="recordPerson">备案人</label>
+                                    <div class="col-md-3" >
+                                        <input type="text" class="form-control not-clear" name="recordPerson" id="recordPerson" placeholder="备案人"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="recordSituation">备案情况</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="recordSituation" id="recordSituation" placeholder="备案情况"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="recordType">备案类型</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="recordType" id="recordType" placeholder="备案类型"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="nameType">域名类型</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="nameType" id="nameType" placeholder="域名类型"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="shengf">                                    
+                                    <label class="control-label col-md-2" for="nameBusiness">域名商</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="nameBusiness" id="nameBusiness" placeholder="域名商"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="buyAccount">购买账号</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="buyAccount" id="buyAccount" placeholder="购买账号"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="category">类别</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="category" id="category" placeholder="类别"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_submit_edit_primary">保存</button>
+                            <button type="button" class="btn btn-default" id="btn_close_primary_edit" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">域名管理系统</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">域名管理</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_3040101" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加域名</button>
+            <button type="button" id="open_dialog_btn_super_search" class="btn red-sunglo permit_3040105" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"></i>高级查询</button>
+            <button type="button" id="open_dialog_btn_edit" class="btn red-sunglo permit_3040106" data-toggle="modal" data-target="#editModal"><i class="fa fa-search"></i>批量修改</button>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i>
+                        域名列表
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall" />
+                                </th>
+                                <th sort='name'>域名</th>
+                                <th sort='service'>服务器</th>
+                                <th sort='ipAddress'>IP</th>
+                                <th sort='owner'>所有者</th>
+                                <th sort='dueDate'>到期日</th>
+                                <th sort='useed'>用途</th>
+                                <th sort='isBurn'>是否在烧</th>
+                                <th sort='recordPerson'>备案人</th>
+                                <th sort='recordSituation'>备案情况</th>
+                                <th sort='recordType'>备案类型</th>
+                                <th sort='nameType'>域名类型</th>
+                                <th sort='nameBusiness'>域名商</th>
+                                <th sort='buyAccount'>购买账号</th>
+                                <th sort='category'>所属</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:domainList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:json">
+                                </td>
+                                <td data-bind="text:name"></td>
+                                <td data-bind="text:service"></td>
+                                <td data-bind="text:ipAddress"></td>
+                                <td data-bind="text:owner"></td>
+                                <td data-bind="text:dueDate"></td>
+                                <td data-bind="text:useed"></td>
+                                <td data-bind="text:isBurn"></td>
+                                <td data-bind="text:recordPerson"></td>
+                                <td data-bind="text:recordSituation"></td>
+                                <td data-bind="text:recordType"></td>
+                                <td data-bind="text:nameType"></td>
+                                <td data-bind="text:nameBusiness"></td>
+                                <td data-bind="text:buyAccount"></td>
+                                <td data-bind="text:category"></td>
+                                <td>
+                                    <!-- ko if:dele -->
+                                    <span data-bind="click:$root.delDomain" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if:edit -->
+                                    <span data-bind="click:$root.editDomain" aria-hidden="true" class="icon-note" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if:show -->
+                                    <span data-bind="click:$root.showDomain" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="2"></td>
+                                <td colspan="10">
+                                    <form data-bind="attr:{'id':'form_'+id}">
+                                        <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>域名：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="name" id="name" placeholder="域名" data-bind="value:name">
+                                                </td>
+                                                <th>域名所有者:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="owner" id="owner" placeholder="域名所有者" data-bind="value:owner">
+                                                </td>
+                                                <th>域名到期日期:</th>
+                                                <td>
+                                                    <input type="text" class="form-control selecter_datepicker" data-date-format="yyyy-mm-dd" readonly="" name="dueDate" id="dueDate" placeholder="域名到期日期" data-bind="value:dueDate">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>服务器:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="service" id="service" placeholder="服务器" data-bind="value:service">
+                                                </td>
+                                                <th>IP:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="ipAddress" id="ipAddress" placeholder="IP" data-bind="value:ipAddress">
+                                                </td>
+                                                <th>域名用途：</th>
+                                                <td>
+                                                    <input type="text" class="form-control dropdown-toggle" name="useed" id="useed" placeholder="域名用途" data-bind="value:useed">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>是否在烧：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="isBurn" id="isBurn" placeholder="是否在烧" data-bind="value:isBurn">
+                                                </td>
+                                                <th>备案人：</th>
+                                                <td>
+                                                    <input type="text" class="form-control not-clear" name="recordPerson" id="recordPerson" placeholder="备案人" data-bind="value:recordPerson">
+                                                </td>
+                                                <th>备案情况：</th>
+                                                <td>
+                                                    <input type="text" class="form-control dropdown-toggle" name="recordSituation" id="recordSituation" placeholder="备案情况" data-bind="value:recordSituation">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>备案类型：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="recordType" id="recordType" placeholder="备案类型" data-bind="value:recordType">
+                                                </td>
+                                                <th>域名类型：</th>
+                                                <td>
+                                                    <input type="text" class="form-control not-clear dropdown-toggle" name="nameType" id="nameType" placeholder="域名类型" data-bind="value:nameType">
+                                                </td>
+                                                <th>域名商：</th>
+                                                <td>
+                                                    <input type="text" class="form-control dropdown-toggle" name="nameBusiness" id="nameBusiness" placeholder="域名商" data-bind="value:nameBusiness">
+                                                </td>
+                                            </tr>
+                                            <tr>                                                
+                                                <th>购买账号：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="buyAccount" id="buyAccount" placeholder="购买账号" data-bind="value:buyAccount">
+                                                </td>
+                                                <th>类别：</th>
+                                                <td>
+                                                    <input type="text" class="form-control dropdown-toggle" name="category" id="category" placeholder="类别" data-bind="value:category">
+                                                </td>
+                                                <th></th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn domain_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id,'val':id}">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/domain/domain.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/domain/domain-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/domain/domain.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/domain/domain-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

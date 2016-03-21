@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-用户考勤检查</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/attusercheck_list.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" type="image/ico" href="../../assets/global/img/favicon.ico">
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myexcelModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">导出EXCEL</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="toexcel_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">&nbsp;</label>
+                                    <div class="col-md-8">
+                                        <input type="text" id="excel_type" value="11"/>
+                                    </div>
+                                </div>
+                                <div id="all_table">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" for="month">月份</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" readonly="" name="month_text" id="month_text"  placeholder="月份"/>
+                                            <input type="hidden" name="month" id="month"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" for="dept_id">部门</label>
+                                        <div class="col-md-8">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" class="form-control" readonly="" id="dept_name" placeholder="部门"/>
+                                                <input type="hidden" name="dept_id" id="dept_id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="day_table" style="display: none;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" for="days">日期</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" readonly="" id="days" placeholder="日期"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_toexcel_primary">确认导出</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">考勤管理</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">用户考勤检查</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="outexcel" class="btn red-sunglo" data-toggle="modal" data-target="#myexcelModal"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+        </div>
+        <div class="month_list">
+            <div class="month_items_list">
+                <input type="text" id="month_items" checkmore="true" value="">
+            </div>
+            <div class="month_tools">
+                <div class="month_tool_btn month_tool_btn_check_all">全选</div>
+                <div class="month_tool_btn month_tool_btn_uncheck_all">全不选</div>
+                <div class="month_tool_btn month_tool_btn_create">GO</div>
+            </div>
+        </div>
+        <input type="hidden" id="month" />
+        <input type="hidden" id="dept" />
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-user-following"></i>
+                        用户考勤列表
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th class="dy" rowspan="2" sort='dy'>日期</th>
+                                <th class="username" rowspan="2" sort='userid'>用户</th>
+                                <th class="deptname" rowspan="2" sort='dept_id'>部门</th>
+                            </tr>
+                            <tr></tr>
+                        </thead>
+                        <tbody data-bind="foreach:attusercheckList">
+                            <tr>
+                                <!-- ko if:fields.dy -->
+                                <td style="white-space: pre !important;" class="dy" data-bind="text:dy">日期</td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.username -->
+                                <td style="white-space: pre !important;" class="username" data-bind="text:username">用户</td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.deptname -->
+                                <td style="white-space: pre !important;" class="deptname" data-bind="text:deptname">部门</td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_1 -->
+                                <td style="white-space: pre !important;" class="m_1" data-bind="text:m1"></td>
+                                <td style="white-space: pre !important;" class="m_1" data-bind="text:z1"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_2 -->
+                                <td style="white-space: pre !important;" class="m_2" data-bind="text:m2"></td>
+                                <td style="white-space: pre !important;" class="m_2" data-bind="text:z2"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_3 -->
+                                <td style="white-space: pre !important;" class="m_3" data-bind="text:m3"></td>
+                                <td style="white-space: pre !important;" class="m_3" data-bind="text:z3"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_4 -->
+                                <td style="white-space: pre !important;" class="m_4" data-bind="text:m4"></td>
+                                <td style="white-space: pre !important;" class="m_4" data-bind="text:z4"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_5 -->
+                                <td style="white-space: pre !important;" class="m_5" data-bind="text:m5"></td>
+                                <td style="white-space: pre !important;" class="m_5" data-bind="text:z5"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_6 -->
+                                <td style="white-space: pre !important;" class="m_6" data-bind="text:m6"></td>
+                                <td style="white-space: pre !important;" class="m_6" data-bind="text:z6"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_7 -->
+                                <td style="white-space: pre !important;" class="m_7" data-bind="text:m7"></td>
+                                <td style="white-space: pre !important;" class="m_7" data-bind="text:z7"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_8 -->
+                                <td style="white-space: pre !important;" class="m_8" data-bind="text:m8"></td>
+                                <td style="white-space: pre !important;" class="m_8" data-bind="text:z8"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_9 -->
+                                <td style="white-space: pre !important;" class="m_9" data-bind="text:m9"></td>
+                                <td style="white-space: pre !important;" class="m_9" data-bind="text:z9"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_10 -->
+                                <td style="white-space: pre !important;" class="m_10" data-bind="text:m10"></td>
+                                <td style="white-space: pre !important;" class="m_10" data-bind="text:z10"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_11 -->
+                                <td style="white-space: pre !important;" class="m_11" data-bind="text:m11"></td>
+                                <td style="white-space: pre !important;" class="m_11" data-bind="text:z11"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_12 -->
+                                <td style="white-space: pre !important;" class="m_12" data-bind="text:m12"></td>
+                                <td style="white-space: pre !important;" class="m_12" data-bind="text:z12"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_13 -->
+                                <td style="white-space: pre !important;" class="m_13" data-bind="text:m13"></td>
+                                <td style="white-space: pre !important;" class="m_13" data-bind="text:z13"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_14 -->
+                                <td style="white-space: pre !important;" class="m_14" data-bind="text:m14"></td>
+                                <td style="white-space: pre !important;" class="m_14" data-bind="text:z14"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_15 -->
+                                <td style="white-space: pre !important;" class="m_15" data-bind="text:m15"></td>
+                                <td style="white-space: pre !important;" class="m_15" data-bind="text:z15"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_16 -->
+                                <td style="white-space: pre !important;" class="m_16" data-bind="text:m16"></td>
+                                <td style="white-space: pre !important;" class="m_16" data-bind="text:z16"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_17 -->
+                                <td style="white-space: pre !important;" class="m_17" data-bind="text:m17"></td>
+                                <td style="white-space: pre !important;" class="m_17" data-bind="text:z17"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_18 -->
+                                <td style="white-space: pre !important;" class="m_18" data-bind="text:m18"></td>
+                                <td style="white-space: pre !important;" class="m_18" data-bind="text:z18"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_19 -->
+                                <td style="white-space: pre !important;" class="m_19" data-bind="text:m19"></td>
+                                <td style="white-space: pre !important;" class="m_19" data-bind="text:z19"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_20 -->
+                                <td style="white-space: pre !important;" class="m_20" data-bind="text:m20"></td>
+                                <td style="white-space: pre !important;" class="m_20" data-bind="text:z20"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_21 -->
+                                <td style="white-space: pre !important;" class="m_21" data-bind="text:m21"></td>
+                                <td style="white-space: pre !important;" class="m_21" data-bind="text:z21"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_22 -->
+                                <td style="white-space: pre !important;" class="m_22" data-bind="text:m22"></td>
+                                <td style="white-space: pre !important;" class="m_22" data-bind="text:z22"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_23 -->
+                                <td style="white-space: pre !important;" class="m_23" data-bind="text:m23"></td>
+                                <td style="white-space: pre !important;" class="m_23" data-bind="text:z23"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_24 -->
+                                <td style="white-space: pre !important;" class="m_24" data-bind="text:m24"></td>
+                                <td style="white-space: pre !important;" class="m_24" data-bind="text:z24"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_25 -->
+                                <td style="white-space: pre !important;" class="m_25" data-bind="text:m25"></td>
+                                <td style="white-space: pre !important;" class="m_25" data-bind="text:z25"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_26 -->
+                                <td style="white-space: pre !important;" class="m_26" data-bind="text:m26"></td>
+                                <td style="white-space: pre !important;" class="m_26" data-bind="text:z26"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_27 -->
+                                <td style="white-space: pre !important;" class="m_27" data-bind="text:m27"></td>
+                                <td style="white-space: pre !important;" class="m_27" data-bind="text:z27"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_28 -->
+                                <td style="white-space: pre !important;" class="m_28" data-bind="text:m28"></td>
+                                <td style="white-space: pre !important;" class="m_28" data-bind="text:z28"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_29 -->
+                                <td style="white-space: pre !important;" class="m_29" data-bind="text:m29"></td>
+                                <td style="white-space: pre !important;" class="m_29" data-bind="text:z29"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_30 -->
+                                <td style="white-space: pre !important;" class="m_30" data-bind="text:m30"></td>
+                                <td style="white-space: pre !important;" class="m_30" data-bind="text:z30"></td>
+                                <!-- /ko-->
+                                <!-- ko if:fields.m_31 -->
+                                <td style="white-space: pre !important;" class="m_31" data-bind="text:m31"></td>
+                                <td style="white-space: pre !important;" class="m_31" data-bind="text:z31"></td>
+                                <!-- /ko-->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/attendance/attusercheck_list.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/attendance/attusercheck_list.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

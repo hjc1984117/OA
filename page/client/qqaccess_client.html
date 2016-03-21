@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-QQ接入</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/local/css/salecount_rank.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+        <style>
+            #dataTable{font-size:10px;}
+            th{text-align: center;}
+        </style>
+    </head>
+    <body style="background: #ffffff;margin-bottom: 50px !important;padding: 0px;">
+        <div >
+            <div class="portlet box">
+                <div class="auto_tab_close">
+                    <div class="title">QQ接入</div>
+                    <div class="sp-tools-main">
+                        <button title="返回" onclick="javascript:window.location.href = '../center/personal_center_client.html'"><div class="fa fa-mail-reply"></div></button>
+                        <button class="d_checked data_type" d="/api/client/qqaccess_client.php" title="查看星密码转Q">星密码</button>
+                        <button class="data_type" d="/api/client/qqaccess_soft_client.php" title="查看软件部转Q">软件部</button>
+                    </div>
+                </div>
+                <div  >
+                    <table class="table table-hover" id="dataTable" style="max-width: 650px;margin: 0px auto;">
+                        <thead>
+                            <tr>
+                                <th sort='qq_num'>客户QQ</th>
+                                <th sort='addtime'>转发时间</th>
+                                <th>等待时间(秒)</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:accessList">
+                            <tr>
+                                <td data-bind="text:qq_num"></td>
+                                <td data-bind="text:addtime" style="width:20%;"></td>
+                                <td data-bind="attr:{class:end_class+' wait_time'}, text:wait_time" style="color:#0995e0;"></td>
+                                <td style="margin-left:30px;">
+                                    <!--ko if:!hasEnd-->
+                                    <!--ko if:can_access-->
+                                    <span data-bind="click:$root.doAccess,attr:{'id':'doAccess_'+id}" aria-hidden="true" class="fa fa-check" style="cursor: pointer;margin-left: 10px;float: left;" title="确认"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:hasval-->
+                                    <span data-bind="click:$root.doVal,attr:{'id':'doVal'+id}" aria-hidden="true" class="fa fa-question" style="cursor: pointer;margin-left: 10px;color: red;float: left;" title="索取QQ验证"></span>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>  
+
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+                            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+                            document.write("<script src='../../assets/local/client/qqaccess_client.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/client/qqaccess_client.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale/qq_access-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

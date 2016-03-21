@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-人员通讯录</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <input type='hidden' id="status" value="0"/>
+        <input type="hidden" id="deptid"/>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">员工档案管理</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">员工通讯录</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="outexcel_phone" class="btn red-sunglo permit_1010106"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title" id="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users"></i>
+                        员工通讯录
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='employee_no'>员工编号</th>
+                                <th sort='username'>姓名</th>
+                                <th>所属部门</th>
+                                <!--<th>所属二级部门</th>-->
+                                <th>职位</th>
+                                <th sort='phone'>联系电话</th>
+                                <th>QQ</th>
+                                <th sort='sex'>性别</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:employeeList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="attr:{'value':userid}">
+                                </td>
+                                <td data-bind="text:employee_no"></td>
+                                <td data-bind="text:username"></td>
+                                <td data-bind="text:dept1_text,attr:{'dept1_id':dept1_id}"></td>
+                                <!--<td data-bind="text:dept2_text,attr:{'dept2_id':dept2_id}"></td>-->
+                                <td data-bind="text:role_text,attr:{'role_id':role_id}"></td>
+                                <td data-bind="text:phone"></td>
+                                <td>
+                                    <a href="#" data-bind="text:qq"></a>
+                                </td>
+                                <td data-bind="text:sex_text"></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>  
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/employee/employee.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/employee/employee.js" type="text/javascript"></script>-->
+    </body>
+</html>

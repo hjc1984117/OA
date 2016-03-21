@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>员工个人中心</title>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-jcrop/css/jquery.Jcrop.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/center_1.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body style="background: white;overflow-x: hidden;">
+        <div class="sp-refresh-main">
+            <a href="javascript:void(0);" class="sp-ranking-button" title="排行榜"><div class="glyphicon glyphicon-sort-by-attributes-alt"></div></a>
+            <a href="javascript:void(0);" class="sp-saft-access-button" title="软件部QQ接入"><div class="fuck fa fa-qq"></div></a>
+            <a href="javascript:window.location.reload();" class="sp-refresh-button" title="刷新"><div class="sp-refresh"></div></a>
+        </div>
+        <div class="div_main">
+            <div style="height: 30px;"></div>
+            <div class="div_context">
+                <div class="div_context_center">
+                    <div class="div_write_main">
+                        <div class="div_write_info" contenteditable="true" id="div_write_info"></div>
+                        <form id="write_file_upload" class="form-horizontal" action="/api/center/avatar_upload.php" method="post" enctype="multipart/form-data">
+                            <input  type="file" id='div_write_upload' name='imageUpload'/>
+                        </form>
+                        <div class="div_write_bar">
+                            <span class="icon-emoticon-smile expression_btn" to='div_write_info' title="表情"></span>
+                            <span class="show_at_panel_btn" style="font-size: 21px;display: none;" title="提到的人">@</span>
+                            <span class="fa fa-slack show_topic_panel_btn" style="display: none;" title="话题"></span>
+                            <span class="glyphicon glyphicon-link show_link_panel_btn" style="display: none;" title="外链"></span>
+                            <span>
+                                <label style="margin-top: 3px;cursor: pointer;"><input type="checkbox" id="daily_share_checkbox"/>每日分享</label>
+                            </span>
+                            <button class="send_btn" style="padding: 0px 10px 0px 10px;width: auto;">发表</button>
+                            <div class="div_write_upload " style="padding: 0px 10px 0px 10px;width: auto;">添加图片</div>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    <div class="div_daily_share_outer" id="daily_share">
+                        <div class="div_daily_share_title">每日分享</div>
+                    </div>
+                    <div class="div_daily_share_outer" id='user_talk'>
+                        <div class="div_daily_share_title">员工动态</div>
+                    </div>
+                    <div class="div_daily_share_outer">
+                        <!--<div class="div_daily_share_load_more">加载更多...</div>-->
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="expression_panel_outer">
+                <div class="expression_panel_close">
+                    <div class="expression_panel_close_btn" title="关闭">X</div>
+                </div>
+                <div class="expression_panel_top"></div>
+                <div class="expression_panel_button">
+                    <div>
+                        <span class="next_page">下一页</span>
+                        <span>/5</span>
+                        <span class="totle_page">1</span>
+                        <span class="prv_page vis">上一页</span>
+                    </div>
+                </div>
+            </div>
+            <div class="div_reply_second_outer">
+                <div class="div_reply_second_close">
+                    <div class="div_reply_second_title"></div>
+                    <div class="div_reply_second_close_btn" title="关闭">X</div>
+                </div>
+                <div class="div_reply_second_content_write_info" contenteditable="true"></div>
+                <div class="div_reply_second_button">
+                    <span class="icon-emoticon-smile expression_btn" to='div_reply_second_content_write_info'></span>
+                    <button class="send_reply_second_btn">发表</button>
+                </div>
+            </div>
+            <div class="div_avatar_outer">
+                <div class="div_avatar_close">
+                    <div class="div_avatar_close_title">头像修改</div>
+                    <div class="div_avatar_close_btn" title="关闭">X</div>
+                </div>
+                <div class="div_avatar_content">
+                    <div class="div_avatar_content_left">
+                        <div class="avatar_upload_outer">
+                            <div class="avatar_upload_btn">
+                                <span>选择头像</span>
+                                <form id="avatar_file_upload" class="form-horizontal" action="/api/center/avatar_upload.php" method="post" enctype="multipart/form-data">
+                                    <input id="avatar_fileupload" type="file" name="avatarFileToUpload">
+                                </form>
+                            </div>
+                            <div class="avatar_upload_progress">
+                                <span class="avatar_upload_bar"></span>
+                                <span class="avatar_upload_percent">0%</span >
+                            </div>
+                            <div id="avatar_upload_showimg"></div>
+                        </div>
+                        <div class="div_img_outer" id="div_img_outer">
+                            <img alt="" src="" />
+                        </div>
+                    </div>
+                    <div class="div_avatar_content_right">
+                        <div id="picture_126"></div>
+                        <div id="picture_50"></div>
+                        <div id="picture_30"></div>
+                    </div>
+                </div>
+                <div class="div_avatar_bottom">
+                    <button class="cut_upload">裁剪上传</button>
+                </div>
+            </div>
+            <div class="link_panel_outer">
+                <div class="link_panel_title">
+                    <div class="link_panel_title_context">外链地址</div>
+                    <div class="link_panel_title_close_btn" title="关闭">X</div>
+                </div>
+                <div class="link_panel_context">
+                    <input type="text" class="link_word" maxlength="100" placeholder="文字"/>
+                    <div class="h"></div>
+                    <textarea class="link_text" placeholder="连接地址" maxlength="400"></textarea>
+                </div>
+                <div class="link_panel_button">
+                    <button class="link_panel_add_link_button">发表</button>
+                </div>
+            </div>            
+            <!--<div class="div_gotop_outer" title="返回顶部"></div>-->
+        </div>
+    </body>
+
+    <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+    <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+    <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.form.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-jcrop/js/jquery.jcrop.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-jcrop/js/avatarCutter.js" type="text/javascript"></script>
+    <script>
+        document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        document.write("<script src='../../assets/local/center/personal_center_1.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+    </script>
+    <!--<script src='../../assets/local/ycoa.js' type='text/javascript'></script>-->
+    <!--<script src="../../assets/local/center/personal_center_1.js" type="text/javascript"></script>-->
+</html>

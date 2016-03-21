@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-销售统计列表</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">填写销售统计资料</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_salecount_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">快捷填单</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" id="quikWrite" placeholder="粘贴销售单内容" aria-required="true" aria-invalid="false"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="ather"></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" id="ather" name="ather" checkMore='true' aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">旺旺名<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="ww" id="ww" placeholder="旺旺名" aria-required="true" aria-invalid="false"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="name">真实姓名<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="真实姓名" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="mobile">手机号</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="手机号"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="qq">QQ号<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ号"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="money">金额<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="money" id="money" placeholder="金额"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="setmeal">套餐版本<span class="required">*</span></label>
+                                    <div class="col-md-3" >
+                                        <input type="text" class="form-control not-clear" name="setmeal" id="setmeal" placeholder="套餐版本"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="payment">收款方式<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="payment" id="payment" placeholder="收款方式"/>
+                                    </div>
+
+                                    <label class="control-label col-md-2" for="channel">接入渠道<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="channel" id="channel" placeholder="接入渠道" readonly="" value=""/>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="shengf">                                    
+                                    <label class="control-label col-md-2" for="province">省份<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control not-clear" name="province" id="province" placeholder="省份"/>
+                                    </div>
+<!--                                    <label class="control-label col-md-2"  for='shop'>收款店铺</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="c_shop" id="c_shop" placeholder="伤心的雨收入" value="伤心的雨收入"/>
+                                    </div>-->
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="arrears"><input type="checkbox" name="arrearsbox" id="arrearsbox"/>欠款</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="arrears" id="arrears" placeholder="欠款" style="display:none;"/>
+                                    </div>
+                                    <label class="control-label col-md-2" for="reSetSalecountNow">立即分配售后<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="reSetSalecountNow" id="reSetSalecountNow" placeholder="是否立即分配老师"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="remark">售前返现金额</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="presales_cashback" id="presales_cashback" placeholder="售前返现金额"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="remark">备注</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" name="remark" id="remark" placeholder="备注"/>
+                                    </div>                                
+                                </div>                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="myEditor"><input type="checkbox" name="att" id="att"/>附件</label>
+                                    <div class="col-md-8 ui-draggable-disabled" id="editor" style="display:none;">
+                                        <div id="attachment" style="height:200px; width:568px;border:solid 1px #cecece;outline: none;overflow-x: auto;overflow-y: auto;" placeholder="请将图片粘贴到此处" title="请将图片粘贴到此处" contenteditable="true"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                            <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myRefundModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加退款</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_refund_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="add_user">操作人员<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" readonly="" name="add_user" id="add_user" placeholder="操作人员" aria-required="true" aria-invalid="false"/>
+                                            <input type="hidden" name="userid" id="userid"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="money">退款金额<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="money" id="money" placeholder="退款金额"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="retrieve">挽回金额<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="retrieve" id="retrieve" placeholder="挽回金额"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="recordMoney">记录金额<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="recordMoney" id="recordMoney" placeholder="记录金额"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="refund_type">退款类型<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="refund_type" id="refund_type" placeholder="退款类型"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="refund_rate">实际退款笔数<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="refund_rate" id="refund_rate" placeholder="退款笔数"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ind_refund_rate">个人退款笔数<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="ind_refund_rate" id="ind_refund_rate" placeholder="个人退款笔数"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="duty">实际责任<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="duty" id="duty" placeholder="实际责任"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="status">退款方式<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="status" id="status" placeholder="退款方式"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="is_logoff_dbb">是否注销店宝宝<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="is_logoff_dbb" id="is_logoff_dbb" placeholder="是否注销店宝宝"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="reason">退款原因<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="reason" id="reason" placeholder="退款原因"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="date">退款时间</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-time-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd hh:ii:ss" name="date" id="date"  placeholder="退款时间(不填按当前日期)"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="remark">备注</label>
+                                    <div class="col-md-8">
+                                        <textarea type="text" class="form-control" name="remark" id="remark" placeholder="备注"></textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="totalmoney" id="totalmoney"/>
+                                <input type="hidden" name="s_id" id="s_id"/>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_refund_primary">保存</button>
+                            <button type="button" class="btn btn-default" id="btn_close_refund" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myCashbackModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加返现</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_cashback_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="duty">实际责任<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" readonly="" name="duty" id="duty" placeholder="实际责任" aria-invalid="false"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="cashback_shop">返现店铺<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" readonly="" name="cashback_shop" id="cashback_shop" placeholder="返现店铺" aria-invalid="false"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="cashback_way">返现方式<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" readonly="" name="cashback_way" id="cashback_way" placeholder="返现方式" aria-invalid="false"/>
+                                    </div>
+                                </div>
+                              <!--  <div class="form-group">
+                                    <label class="control-label col-md-3" for="cashback_reason">返现原因<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input type="text" readonly="" class="form-control" name="cashback_reason" id="cashback_reason" placeholder="返现原因"/>
+                                    </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="cashback">返现金额<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="cashback" id="cashback" placeholder="返现金额"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="date">退款时间</label>
+                                    <div class="col-md-6">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="date" id="date"  placeholder="返现时间(不填按当前日期)"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="remark">备注</label>
+                                    <div class="col-md-6">
+                                        <textarea class="form-control" name="remark" id="remark" placeholder="备注"></textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="s_id" id="s_id"/>
+                            </div> 
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_cashback_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_cashback" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myexcelModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">导出EXCEL</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="toexcel_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="type">导出时间类型<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <select class="form-control" readonly="" name="type" id="type"  placeholder="导出时间类型">
+                                                <option value="1">添加时间</option>
+                                                <option value="2">分配售后时间</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2 label_data_status" for="data_status">数据类型</label>
+                                    <div class="col-md-3 label_data_status">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <select class="form-control" readonly="" name="data_status" id="data_status"  placeholder="数据类型">
+                                                <option value="1">全部</option>
+                                                <option value="2">正常</option>
+                                                <option value="3">冲突</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">开始日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="start_time" id="start_time"  placeholder="开始时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="name">结束日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="end_time" id="end_time"  placeholder="结束时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_toexcel_primary">确认导出</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type='hidden' id="searchStatus"/>
+        <input type='hidden' id="searchSetmeal"/>
+        <input type='hidden' id="searchChannel"/>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">销售统计</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">销售统计</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="permit_buttons" style="float: left;">
+                <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_3030301" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加销售记录</button>
+                <button type="button" id="outexcel" class="btn red-sunglo permit_3030305" data-toggle="modal" data-target="#myexcelModal"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+                <button type="button" id="show_ranking" class="btn red-sunglo"><i class="glyphicon glyphicon-sort-by-attributes-alt"></i>查看排行榜</button>
+            </div>
+            <div style="position: absolute;right: 0px;height: 34px;line-height: 34px;font-size: 20px;font-weight:bolder;margin: -18px 15px 10px 15px" class="TodayTotals"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i>
+                        销售统计列表
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='addtime'>日期</th>
+                                <th sort='ww'>旺旺名</th>
+                                <th sort='name'>真实姓名</th>
+                                <th>QQ号</th>
+                                <th>手机号</th>
+                                <th sort="money">金额</th>
+                                <th sort='setmeal'>套餐版本</th>                                
+                                <th sort='c_shop'>收款店铺</th>
+                                <th sort='payment'>收款方式</th>
+                                <th sort='channel'>接入渠道</th>
+                                <th sort='province'>省份</th>
+                                <th sort='isTimely'>是否及时</th>
+                                <th sort='isQQTeach'>QQ教学</th>
+                                <th sort='arrears'>欠款(元)</th>
+                                <th sort='presales'>售前</th>
+                                <th sort='presales_cashback'>售前返现</th>
+                                <th sort='nick_name'>售后</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:salecountList">
+                            <tr data-bind="attr:{style:color_}">
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:id">
+                                </td>
+                                <td data-bind="text:addtime"></td>
+                                <td data-bind="text:ww"></td>
+                                <td data-bind="text:name"></td>
+                                <td data-bind="text:qq"></td>
+                                <td data-bind="text:mobile"></td>
+                                <td data-bind="text:money"></td>
+                                <td data-bind="text:setmeal"></td>
+                                <td data-bind="text:c_shop"></td>
+                                <td data-bind="text:payment"></td>
+                                <td data-bind="text:channel"></td>
+                                <td data-bind="text:province"></td>
+                                <td data-bind="text:isTimely_txt"></td>
+                                <td data-bind="text:isQQTeach_txt"></td>
+                                <td data-bind="text:arrears"></td>
+                                <td>
+                                    <span data-bind="text:presales"></span>
+                                    <!--ko if:setPresales-->
+                                    <span data-bind="click:$root.setPresales" aria-hidden="true" class="fa fa-hand-o-right" style="cursor: pointer;margin-left: 10px;" title="更换售前"></span>
+                                    <!-- /ko -->
+                                </td>
+                                 <td data-bind="text:presales_cashback"></td>
+                                <td>
+                                    <span data-bind="text:nick_name"></span>
+                                    <!--ko if:setNickName-->
+                                    <span data-bind="click:$root.setNickName" aria-hidden="true" class="fa fa-hand-o-right" style="cursor: pointer;margin-left: 10px;" title="更换售后"></span>
+                                    <!-- /ko -->
+                                </td>         
+                                <td data-bind="attr:{'id':'customer_td_'+id}">
+                                    <!--ko if:reSetSalecount-->
+                                    <span data-bind="click:$root.setSalecount" aria-hidden="true" class="fa fa-hand-o-up" style="cursor: pointer;margin-left: 10px;" title="重新分配售后"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:dele-->
+                                    <span data-bind="click:$root.delSalecount" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:edit-->
+                                    <span data-bind="click:$root.editSalecount,attr:{'val':id}" aria-hidden="true" class="icon-note data_list_div" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <div class="dataLog_detail" data-bind="attr:{'id':'dataLog_detail_'+id}">
+                                        <img src="../../assets/global/img/input-spinner.gif" style="margin-top: 130px">
+                                    </div>
+                                    <!-- /ko -->
+                                    <!--ko if:show-->
+                                    <span data-bind="click:$root.showSalecount" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                     <!--ko if:refund-->
+                                    <span data-bind="click:$root.refund" aria-hidden="true" class="fa fa-frown-o" data-toggle="modal" data-target="#myRefundModal" style="cursor: pointer;margin-left: 10px;font-size:17px;" title="退款"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:cashback-->
+                                    <span data-bind="click:$root.cashback" aria-hidden="true" class="icon-emoticon-smile" data-toggle="modal" data-target="#myCashbackModal" style="cursor: pointer;margin-left: 10px;" title="返现"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="2"></td>
+                                <td colspan="13">
+                                    <form data-bind="attr:{'id':'form_'+id}">
+                                        <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                        <input type="hidden" name="customer_id" id="customer_id" data-bind="value:customer_id"/>
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>旺旺名：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="ww" id="ww" placeholder="旺旺名" data-bind="value:ww"/>
+                                                </td>
+                                                <th>真实姓名：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="name" id="name" placeholder="真实姓名" data-bind="value:name"/>
+                                                </td>
+                                                <th></th>
+                                                <td>
+                                                    <input type="text" class="form-control" id="ather" name="ather" checkMore='true' aria-required="true" aria-invalid="false" data-bind="value:ather"/>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>QQ号：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ号" data-bind="value:qq"/>
+                                                </td>
+                                                <th>手机号：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="手机号" data-bind="value:mobile"/>
+                                                </td>
+                                                <th>金额:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="money" id="money" placeholder="手机号" data-bind="value:money"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>套餐:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="setmeal" id="setmeal" placeholder="套餐" data-bind="value:setmeal">
+                                                </td>
+                                                <th>收款方式:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="payment" id="payment" placeholder="收款方式" data-bind="value:payment">
+                                                </td>
+                                                <th>接入渠道:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="channel" id="channel" placeholder="接入渠道" readonly="" data-bind="value:channel">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>省份:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="province" id="province" placeholder="省份" data-bind="value:province">
+                                                </td>
+                                                <th>收款店铺:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="c_shop" id="c_shop" placeholder="收款店铺"  data-bind="value:c_shop">
+                                                </td>
+                                                <th>欠款:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="arrears" id="arrears" placeholder="欠款"  data-bind="value:arrears">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>备注:</th>
+                                                <td colspan="3">
+                                                    <textarea class="form-control" name="remark" id="remark" placeholder="备注" data-bind="value:remark"></textarea>
+                                                </td>
+                                                <th>售前返现金额:</th>
+                                                <td colspan="2">
+                                                    <input type="text" class="form-control" name="presales_cashback" id="presales_cashback" placeholder="售前返现金额" data-bind="value:presales_cashback"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    附件:<br>
+                                                </th>
+                                                <td colspan="6">
+                                                    <div contenteditable="true" id="attachment_edit" style="height: 200px;width: 100%;border: solid 1px #cecece;outline: none;text-align: left; overflow-x: auto;overflow-y: auto;" placeholder="请将图片粘贴到此处" title="请将图片粘贴到此处" data-bind="html:attachment"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn dept_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id,'val':id}">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auto_tab_main" t="0">
+            <div class="auto_tab_close">
+                <div class="title">销售排行榜</div>
+                <div class="close_btn" title="关闭">x</div>
+            </div>
+            <div class="auto_tab_title">
+                <ul>
+                    <li class="select" var="1">当天</li>
+                    <li var="2">本周</li>
+                    <li var="3">本月</li>
+                </ul>
+            </div>
+            <div class="auto_tab_context">
+                <div class="open" var="1"></div>
+                <div class="" var="2"></div>
+                <div class="" var="3"></div>
+            </div>
+        </div>
+
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>                                                                                                                                                
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sale_soft/salecount.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sale_soft/salecount-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sale_soft/cashback-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sale_soft/refund-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale_soft/salecount.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale_soft/salecount-form-validate.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale_soft/cashback-form-validate.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale_soft/refund-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

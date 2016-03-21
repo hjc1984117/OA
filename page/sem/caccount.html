@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-账号管理</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+    	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加账号记录</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注: 标有<span style="color: red;">*</span>符号的字段为必填项
+                        </div>
+                        <form id="add_caccount_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                            	<div class="form-group">
+                                    <label class="control-label col-md-3" for="form_account_type">账号类型<span style="color: red;">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input class="form-control not-clear" name="account_type" id="form_account_type" value="1" placeholder="账号类型"/>
+                                        </div>
+                                    </div>       
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="username">账号名称<span style="color: red;">*</span></label>
+                                    <div class="col-md-5">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="account" id="form_account" placeholder="账号名称" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group parentaccount" id="parent_account" style="display:none;">
+                                    <label class="control-label col-md-3" for="form_parent_id">主账号<span class="required">*</span></label>
+                                    <div class="col-md-5">
+                                        <input type="text" value="" class="form-control not-clear" readonly="true" name="parent_name" id="form_parent_name" placeholder="主账号"/>
+                                        <input type="hidden" value=""  name="parent_id" id="form_parent_id"/>  
+                                    </div>
+                                </div>
+                                <div class="baseaccount">
+	                                <div class="form-group">
+	                                    <label class="control-label col-md-3" for="form_token" ><span id="msg_from_token">TOKEN</span><span style="color: red;">*</span></label>
+	                                    <div class="col-md-5">
+	                                        <div class="input-icon right">
+	                                            <i class="fa"></i>
+	                                            <input type="text" class="form-control" name="token" id="form_token" placeholder="TOKEN" aria-required="true" aria-invalid="false"/>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <label class="control-label col-md-3" for="form_pwd"><span id="msg_from_pwd">账号密码</span><span style="color: red;">*</span></label>
+	                                    <div class="col-md-5">
+	                                        <div class="input-icon right">
+	                                            <i class="fa"></i>
+	                                            <input type="password" class="form-control" name="pwd" id="form_pwd" placeholder="密码" aria-required="true" aria-invalid="false"/>
+	                                        </div>
+	                                    </div>
+	                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="channel">跳转地址</label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input class="form-control not-clear" name="site" id="form_site" value="" placeholder="跳转地址"/>
+                                        </div>
+                                    </div>       
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="channel">渠道<span style="color: red;">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input class="form-control not-clear" name="channel" id="form_channel" value="baidu_pc" placeholder="渠道"/>
+                                        </div>
+                                    </div>       
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="channel">类型<span style="color: red;">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input class="form-control not-clear" name="product_type" id="form_product_type" value="xmm" placeholder="星密码"/>
+                                        </div>
+                                    </div>       
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">推广统计</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">账号管理</a></li>
+            </ul>
+        </div>
+        <!-- data-target is murder content id -->
+   	     <div class="permit_buttons">
+            <button data-target="#myModal" data-toggle="modal" class="btn red-sunglo permit_3070401" id="open_dialog_btn" type="button"><i class="fa fa-plus"></i>添加账户</button>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i> 账号列表  
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                               
+                                <th sort='created'>添加时间</th>
+                                <th sort='account'>账号名称</th>
+                                <th sort='site'>跳转地址</th>
+                                <th sort='token'>TOKEN</th>
+                                <th sort='product_type'>类型</th>
+                                <th sort='channel'>渠道</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:salecountList">
+                            <tr>
+                                <td data-bind="text:created"></td>
+                                <td data-bind="text:account"></td>
+                                <td data-bind="text:site"></td>
+                                <td data-bind="text:token"></td>
+                                <td data-bind="text:product_type_name"></td>
+                                <td data-bind="text:channel_name"></td>
+                                <td data-bind="attr:{'id':'customer_td_'+id}">
+                                    <!--ko if:dele-->
+                                    <span data-bind="click:$root.delSalecount,attr:{'val':id}" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:edit-->
+                                    <span  data-bind="click:$root.editSalecount,attr:{'val':id}" aria-hidden="true" class="icon-note data_list_div" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <div class="dataLog_detail" data-bind="attr:{'id':'dataLog_detail_'+id}">
+                                        <img src="../../assets/global/img/input-spinner.gif" style="margin-top: 130px">
+                                    </div>
+                                    <!-- /ko -->
+                                    <!--ko if:show-->
+                                    <span data-bind="click:$root.showSalecount" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                            	<td colspan="2"></td>
+                                <td>
+                                    <form class="subform" data-bind="attr:{'id':'form_'+id,'pid':parent_id}">
+                                        <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                        <table class="table second_table">
+                                        	<tr>
+                                                <th>账号类型：</th>
+                                                <td data-bind="text:parent_flag_name" style="text-align:left"></td>
+                                            </tr>
+                                           
+                                            <tr>
+                                                <th>账号名称：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="account" id="account" placeholder="账号名称" data-bind="value:account"/>
+                                                </td>
+                                            </tr>
+                                             <!--ko if:isParent-->
+                                             <tr>
+                                                <th>TOKEN</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="token" id="token" placeholder="TOKEN" data-bind="value:token"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>账号密码</th>
+                                                <td>
+                                                    <input type="password" class="form-control" name="pwd" id="pwd" placeholder="密码" data-bind="value:pwd"/>
+                                                </td>
+                                            </tr>
+                                             <!-- /ko -->
+                                              <!--ko if:isChild-->
+                                            <tr>
+                                                <th>主账号：</th>
+                                                <td>
+	                                                <div class="parent_box">
+				                                        <input type="text" value="" class="form-control not-clear" readonly="true" name="parent_name" id="parent_name" placeholder="主账号"/>
+				                                        <input type="hidden" value=""  name="parent_id" id="parent_id"/>  
+				                                    </div>
+                                                    
+                                                </td>
+                                            </tr>
+                                            <!-- /ko -->
+                                            <tr>
+                                                <th>跳转地址：</th>
+                                                <td>
+				                                   <input type="text" class="form-control" name="site" id="site" placeholder="跳转地址" data-bind="value:site">
+				                                
+                                                    
+                                                </td>
+                                            </tr>
+                                            <tr> 
+                                               		<th>渠道:</th>
+	                                                <td>
+	                                                    <input type="text" class="form-control" name="channel" readonly="" id="channel" placeholder="接入渠道" data-bind="value:channel">
+	                                                </td>
+                                                 </tr>
+                                               <tr> 
+                                                <th>类型:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="product_type" readonly="" id="product_type" placeholder="接入渠道" data-bind="value:product_type">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn dept_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id,'val':id}">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+        	document.write("<script src='../../assets/local/basedatas.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sem/caccount-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sem/caccount.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html> 

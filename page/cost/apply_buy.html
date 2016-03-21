@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-申购列表</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加申购记录</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_app_buy_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="dept1_text">申购部门<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control " name="dept1_text" id="dept1_text" placeholder="申购部门" readonly=""/>
+                                            <input type="hidden" placeholder="申购部门" name="dept1_id" id="dept1_id"/>
+                                            <input type="hidden" name="dept2_id" id="dept2_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="username">申请人<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" readonly="" class="form-control" name="username" id="username" placeholder="申请人" aria-required="true" aria-invalid="false"/>
+                                            <input type="hidden" name="userid" id="userid"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="goods">申购物品<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="goods" id="goods" placeholder="申购物品" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="num">申购数量<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="num" id="num" placeholder="申购数量" aria-required="true" aria-invalid="false"/>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="unit_price">单价(元)<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="unit_price" id="unit_price" placeholder="单价(元)" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="price">金额(元)<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="price" id="price" placeholder="金额(元)" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="way">申购用途<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="way" id="way" placeholder="申购用途" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="add_date">申购日期<span class="required">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover" readonly="" data-date-format="yyyy-mm-dd" name="add_date" id="add_date" placeholder="申购日期"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="remark">申购备注</label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="remark" id="remark" placeholder="备注" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type='hidden' id="page_no"/>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">成本管理</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">申购系统</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_1040101" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加申购信息</button>
+        </div>
+        <input type="hidden" id="deptid" />
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users"></i>
+                        申购信息
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='username'>申购人</th>
+                                <th>所属部门</th>
+                                <th sort='goods'>申购物品</th>
+                                <th sort='num'>数量</th>
+                                <th sort='unit_price'>单价(元)</th>
+                                <th sort='price'>金额(元)</th>
+                                <th>申购用途</th>
+                                <th sort='add_date'>申购日期</th>
+                                <th sort='date'>填单日期</th>
+                                <!--<th>状态</th>-->
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:applyCostList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:id">
+                                </td>
+                                <td data-bind="text:username"></td>
+                                <td data-bind="text:dept1_text,attr:{'dept1_id':dept1_id}"></td>
+                                <td data-bind="text:goods"></td>
+                                <td data-bind="text:num"></td>
+                                <td data-bind="text:unit_price"></td>
+                                <td data-bind="text:price"></td>
+                                <td data-bind="text:way"></td>
+                                <td data-bind="text:add_date"></td>
+                                <td data-bind="text:date"></td>
+                                <!--
+                                    <td>
+                                        <span data-bind="text:status_text, css:status_style"></span>
+                                    </td>
+                                    <td>
+                                         ko if:opts.selfEdit 
+                                        <span data-bind="click:$root.editApplyCost" aria-hidden="true" class="icon-note" style="cursor: pointer;margin-left: 5px;" title="本人修改"></span>
+                                         /ko 
+                                         ko if:opts.selfOk 
+                                        <span data-bind="click:$root.updateApplyCost" aria-hidden="true" class="fa glyphicon glyphicon-ok" style="cursor: pointer;margin-left: 5px;" title="本人确认"></span>
+                                         /ko 
+                                         ko if:opts.selfDelete 
+                                        <span data-bind="click:$root.deleteApplyCost" aria-hidden="true" class="icon-close" style="cursor: pointer;margin-left: 5px;" title="本人删除"></span>
+                                         /ko 
+                                         ko if:opts.deptManagerOkt 
+                                        <span data-bind="click:$root.updateApplyCost" aria-hidden="true" class="glyphicon glyphicon-arrow-up" style="cursor: pointer;margin-left: 5px;" title="部门经理审核"></span>
+                                         /ko 
+                                         ko if:opts.deptManagerOk 
+                                        <span data-bind="click:$root.updateApplyCost" aria-hidden="true" class="glyphicon glyphicon-arrow-up" style="cursor: pointer;margin-left: 5px;" title="行政审核"></span>
+                                         /ko 
+                                         ko if:opts.companyManagerOk 
+                                        <span data-bind="click:$root.updateApplyCost" aria-hidden="true" class="glyphicon glyphicon-arrow-up" style="cursor: pointer;margin-left: 5px;" title="总经理审核"></span>
+                                         /ko 
+                                         ko if:opts.stop 
+                                        <span data-bind="click:$root.stop" aria-hidden="true" class="fa fa-pause" style="cursor: pointer;margin-left: 5px;" title="终止"></span>
+                                         /ko 
+                                    </td>
+                                -->
+                                <td>
+                                    <!-- ko if:show -->
+                                    <span data-bind="click:$root.showApplyCost" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if:edit -->
+                                    <span data-bind="click:$root.editApplyCost" aria-hidden="true" class="icon-note" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <!-- /ko -->
+                                    <!-- ko if:dele -->
+                                    <span data-bind="click:$root.deleteApplyCost" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="2"></td>
+                                <td colspan="8">
+                                    <form data-bind="attr:{'id':'form_'+id}">
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>申购人:</th>
+                                                <td>
+                                                    <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                                    <input type="text" class="form-control" name="username" id="username" placeholder="申购人" readonly="" data-bind="value:username"/>
+                                                    <input type="hidden" name="userid" id="userid" data-bind="value:userid"/>
+                                                </td>
+                                                <th>申购部门:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" readonly="" name="dept1_text" id="dept1_text" placeholder="申购一级部门" data-bind="value:dept1_text"/>
+                                                    <input type="hidden" name="dept1_id" id="dept1_id" data-bind="value:dept1_id"/>
+                                                    <input type="hidden" name="dept2_id" id="dept2_id" data-bind="value:dept2_id"/>
+                                                </td>
+                                                <th>申购用途:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="way" id="way" placeholder="申购用途" data-bind="value:way"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>申购物品:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="goods" id="goods" placeholder="申购物品" data-bind="value:goods"/>
+                                                </td>
+                                                <th>数量:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="num" id="num" placeholder="数量" data-bind="value:num"/>
+                                                </td>
+                                                <th>单价(元):</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="unit_price" id="unit_price" placeholder="单价(元)" data-bind="value:unit_price"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>金额(元):</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="price" id="price" placeholder="金额(元)" data-bind="value:price"/>
+                                                </td>
+                                                <th>申购日期:</th>
+                                                <td>
+                                                    <input type="text" readonly="" class="form-control date-picker-bind-mouseover" name="add_date" id="add_date" data-date-format="yyyy-mm-dd" placeholder="申购日期" data-bind="value:add_date"/>
+                                                </td>
+                                                <th>填单日期:</th>
+                                                <td>
+                                                    <input type="text" readonly="" class="form-control" name="date" id="date" placeholder="填单日期" data-bind="value:date"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>申购备注:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="remark" id="remark" placeholder="申购备注" data-bind="value:remark"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn apply_cost_submit_btn" data-bind="attr:{'id':'submit_'+id,'val':id}">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container" style="overflow: "></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/cost/apply-buy.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/cost/apply-buy-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/cost/apply-buy.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/cost/apply-buy-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

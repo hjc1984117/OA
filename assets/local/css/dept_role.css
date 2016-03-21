@@ -1,0 +1,16 @@
+.permit_main{width:100%;border: solid 1px #ececec;}
+.jstree_dept{width: 20%;border-right: solid 1px #ececec;float: left;overflow-y: auto;overflow-x: hidden;}
+.rolelist_items{width: 30%;border-right: solid 1px #ececec;float: left;overflow-y: auto;overflow-x: hidden;}
+.rolelist_items .role_text{float: left;height: 25px;text-align: center;line-height: 25px;margin: 2px 3px;padding: 0px 5px;cursor: pointer;}
+.rolelist_items .role_text:hover{background: #f7f7f7;color: black;}
+.rolelist_items .checked{background: #d64635;color: white;}
+.rolelist_items .checked:hover{background: #d64635;color: white;}
+.rolelist_items .last{clear: both;}
+
+.permitlist_items{width: 50%;float: left;overflow-y: auto;overflow-x: hidden;padding: 0px 20px;}
+.permitlist_items table{width: 80%;border: solid 1px #ececec;text-align: center;margin: 20px auto;}
+.permitlist_items table tbody tr{border-bottom: solid 1px #ececec;height: 50px;width: 40%;}
+.permitlist_items table tbody tr:last-child{border-bottom: none;}
+.permitlist_items table tbody tr td{border-left: solid 1px #ececec;width: 60%;padding: 0px 10px;}
+#clearDept,#clearDeptName,#clearRoleName,#clearShares{cursor: pointer;}
+#dept_table,#role_table,.dept_submit_btn,.role_submit_btn{display: none;}

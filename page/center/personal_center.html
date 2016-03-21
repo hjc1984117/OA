@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>员工个人中心</title>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-jcrop/css/jquery.Jcrop.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/spectrum/spectrum.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/center.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body style="background: white;overflow-x: hidden;">
+        <div class="div_main">
+            <div class="head-info"></div>
+            <div class="div_title">
+                <div class="div_head_avatar">
+                    <img src="">
+                    <div class="div_head_avatar_change">修改头像</div>
+                </div>
+                <div class="div_user_info">
+                    <ul>
+                        <li>姓名 : <span class="name"></span></li>
+                        <li>部门 : <span class="dept"></span></li>
+                        <li>编号 : <span class="code"></span></li>
+                    </ul>
+                </div>
+                <div class="div_lv_probar_main">
+                    <div class="div_lv_probar">50/100</div>
+                    <div class="div_lv_probar_enter"></div>
+                </div>
+            </div>
+            <div class="div_context">
+                <div class="div_context_left">
+                    <ul>
+                        <li class="div_context_left_title">待办流程</li>
+                        <li class="div_context_left_context">调休<span>5</span></li>
+                        <li class="div_context_left_context">请假<span>5</span></li>
+                        <li class="div_context_left_context">补卡<span>5</span></li>
+                        <li class="div_context_left_context">迟到<span>5</span></li>
+                        <li class="div_context_left_context">行政处罚<span>5</span></li>
+                        <li class="div_context_left_context">旷工<span>5</span></li>
+                    </ul>
+                </div>
+                <div class="div_context_center">
+                    <div class="div_write_main">
+                        <div class="div_write_info" contenteditable="true" id="div_write_info"></div>
+                        <div class="div_write_upload">添加图片</div>
+                        <form id="write_file_upload" class="form-horizontal" action="/api/center/avatar_upload.php" method="post" enctype="multipart/form-data">
+                            <input  type="file" id='div_write_upload' name='imageUpload'/>
+                        </form>
+                        <form id="write_file_comment_upload" class="form-horizontal" style="display: none;" action="/api/center/avatar_upload.php" method="post" enctype="multipart/form-data">
+                            <input  type="file" id='div_write_comment_upload' name='imageUpload'/><!--回复文件上传-->
+                        </form>
+                        <div class="div_write_bar">
+                            <span class="icon-emoticon-smile expression_btn" to='div_write_info' title="表情"></span>
+                            <span class="show_at_panel_btn" style="font-size: 21px;" title="提到的人">@</span>
+                            <span class="fa fa-slack show_topic_panel_btn" style="display: none;" title="话题"></span>
+                            <span class="glyphicon glyphicon-link show_link_panel_btn" title="外链"></span>
+                            <!--<span class="glyphicon glyphicon-film show_film_panel_btn" title="视频"></span>-->
+                            <span>
+                                <label style="margin: 2px 0px 0px 10px;cursor: pointer;"><input type="checkbox" id="daily_share_checkbox"/>每日分享</label>
+                            </span>
+                            <button class="send_btn">发表</button>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    <div class="div_daily_share_outer" id="daily_share">
+                        <div class="div_daily_share_title">每日分享</div>
+                    </div>
+                    <div class="div_daily_share_outer" id='user_talk'>
+                        <div class="div_daily_share_title">员工动态</div>
+                    </div>
+                    <div class="div_daily_share_outer">
+                        <!--<div class="div_daily_share_load_more">加载更多...</div>-->
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+        <div class="expression_panel_outer">
+            <div class="expression_panel_close">
+                <div class="expression_panel_close_btn" title="关闭">X</div>
+            </div>
+            <div class="expression_panel_top"></div>
+            <div class="expression_panel_button">
+                <div>
+                    <span class="next_page">下一页</span>
+                    <span>/5</span>
+                    <span class="totle_page">1</span>
+                    <span class="prv_page vis">上一页</span>
+                </div>
+            </div>
+        </div>
+        <div class="div_reply_second_outer">
+            <div class="div_reply_second_close">
+                <div class="div_reply_second_title"></div>
+                <div class="div_reply_second_close_btn" title="关闭">X</div>
+            </div>
+            <div class="div_reply_second_content_write_info" contenteditable="true"></div>
+            <div class="div_reply_second_button">
+                <span class="icon-emoticon-smile expression_btn" to='div_reply_second_content_write_info'></span>
+                <button class="send_reply_second_btn">发表</button>
+            </div>
+        </div>
+        <div class="div_avatar_outer">
+            <div class="div_avatar_close">
+                <div class="div_avatar_close_title">头像修改</div>
+                <div class="div_avatar_close_btn" title="关闭">X</div>
+            </div>
+            <div class="div_avatar_content">
+                <div class="div_avatar_content_left">
+                    <div class="avatar_upload_outer">
+                        <div class="avatar_upload_btn">
+                            <span>选择头像</span>
+                            <form id="avatar_file_upload" class="form-horizontal" action="/api/center/avatar_upload.php" method="post" enctype="multipart/form-data">
+                                <input id="avatar_fileupload" type="file" name="avatarFileToUpload">
+                            </form>
+                        </div>
+                        <div class="avatar_upload_progress">
+                            <span class="avatar_upload_bar"></span>
+                            <span class="avatar_upload_percent">0%</span >
+                        </div>
+                        <div id="avatar_upload_showimg"></div>
+                    </div>
+                    <div class="div_img_outer" id="div_img_outer">
+                        <img alt="" src="" />
+                    </div>
+                </div>
+                <div class="div_avatar_content_right">
+                    <div id="picture_126"></div>
+                    <div id="picture_50"></div>
+                    <div id="picture_30"></div>
+                </div>
+            </div>
+            <div class="div_avatar_bottom">
+                <button class="cut_upload">裁剪上传</button>
+            </div>
+        </div>
+        <div class="link_panel_outer">
+            <div class="link_panel_title">
+                <div class="link_panel_title_context">插入外链</div>
+                <div class="link_panel_title_close_btn" title="关闭">X</div>
+            </div>
+            <div class="link_panel_context">
+                <input type="text" class="link_word" maxlength="100" placeholder="文字"/>
+                <div class="h"></div>
+                <textarea class="link_text" placeholder="连接地址" maxlength="400"></textarea>
+            </div>
+            <div class="link_panel_button">
+                <button class="link_panel_add_link_button">发表</button>
+            </div>
+        </div>
+        <div class="film_panel_outer">
+            <div class="film_panel_title">
+                <div class="film_panel_title_context">插入视频</div>
+                <div class="film_panel_title_close_btn" title="关闭">X</div>
+            </div>
+            <div class="film_panel_context">
+                <input type="text" class="film_word" maxlength="100" placeholder="视频简介"/>
+                <div class="h"></div>
+                <textarea class="film_text" placeholder="视频播放地址" maxlength="400"></textarea>
+            </div>
+            <div class="film_panel_button">
+                <button class="film_panel_add_film_button">发表</button>
+            </div>
+        </div>
+        <div class="div_gotop_outer" title="回到顶部">
+            <div class="div_gotop_back"></div>
+            <div class="div_gotop_text">顶部</div>
+        </div>
+        <div class="div_setting_outer" title="个人中心设置">
+            <div class="div_setting_back"></div>
+            <div class="div_setting_text">设置</div>
+        </div>
+        <div class="corporate_culture_outer" title="企业文化">
+            <div class="corporate_culture_back icon-book-open"></div>
+            <div class="corporate_culture_text">企业<br>文化</div>
+        </div>
+        <div class="photo_layer" old_width='0'> 
+            <div class="photo_layer_toolbar">
+                <div class="photo_layer_close" title="关闭">X</div>
+                <div class="img_size_progress_outer">
+                    <div class="img_size_progress_btn"></div>
+                </div>
+            </div>
+            <div class="photo_layer_body">
+                <img class="img_view">
+            </div>
+        </div>
+        <div class="div_setting_panle_outer">
+            <div class="div_setting_panle_title">
+                <div class="div_setting_panle_title_text">个人中心设置</div>
+                <div class="div_setting_panle_title_button" title="关闭">X</div>
+                <div class="glyphicon glyphicon-new-window return_default" title="恢复初始值"></div>
+                <div class="center_setting icon-settings" title="页面设置"></div>
+            </div>
+            <div class="div_setting_panle_body">
+                <div class="bg_img_seting_par">
+                    <div class="bg_img_seting_par_tools">
+                        <div class="bg_img_seting_par_back fa fa-mail-reply" title="返回"></div>
+                        <div class="bg_img_seting_par_submit fa fa-check" title="确认"></div>
+                    </div>
+                    <div class="bg_img_seting_par_body">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th colspan="6">背景样式</th>
+                                </tr>
+                                <tr>
+                                    <th>平铺</th>
+                                    <td>
+                                        <select class="form-control" id="background-repeat">
+                                            <option value="repeat">纵向横向平铺</option>
+                                            <option value="repeat-x">横向平铺</option>
+                                            <option value="repeat-y">纵向平铺</option>
+                                            <option value="no-repeat">不平铺</option>
+                                        </select>
+                                    </td>
+                                    <th>位置</th>
+                                    <td>
+                                        <select class="form-control" id="background-position">
+                                            <option value="left top">默认</option>
+                                            <option value="center top">居中</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>移动</th>
+                                    <td>
+                                        <select class="form-control" id="background-attachment">
+                                            <option value="scroll">随页面滚动</option>
+                                            <option value="fixed">固定</option>
+                                        </select>
+                                    </td>
+                                    <th>尺寸</th>
+                                    <td>
+                                        <select class="form-control" id="background-size">
+                                            <option value="">原始尺寸</option>
+                                            <option value="cover">占满屏幕</option>
+                                            <option value="contain">全屏拉伸</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="6">颜色</th>
+                                </tr>
+                                <tr>
+                                    <th>字体颜色</th>
+                                    <td>
+                                        <input class="form-control" id="bg_color"/>
+                                    </td>
+                                    <th>背景颜色</th>
+                                    <td>
+                                        <input class="form-control" id="bg_page_color"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="6">模块显示</th>
+                                </tr>
+                                <tr>
+                                    <th>企业文化</th>
+                                    <td>
+                                        <select class="form-control set_model" id="qywh" v=".index_swf">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                    <th>待办流程</th>
+                                    <td>
+                                        <select class="form-control set_model" id="dblc" v=".div_context_left ul">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>每日分享</th>
+                                    <td>
+                                        <select class="form-control set_model" id="mrfx" v="#daily_share">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                    <th>员工动态</th>
+                                    <td>
+                                        <select class="form-control set_model" id="ygdt" v="#user_talk">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>发表说说</th>
+                                    <td>
+                                        <select class="form-control set_model" id="send_talk" v=".div_write_main">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                    <th>个人信息</th>
+                                    <td>
+                                        <select class="form-control set_model" id="custom_msg" v=".div_title">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>标题</th>
+                                    <td>
+                                        <select class="form-control set_model" id="center_title" v=".head-info">
+                                            <option value="block">显示</option>
+                                            <option value="none">隐藏</option>
+                                        </select>
+                                    </td>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="bg_img_list_outer">
+                    <form id="bg_img_file_upload" style="display: none;" method="post" enctype="multipart/form-data">
+                        <input id="bg_img_fileupload" type="file" name="backgroundImageFileToUpload">
+                    </form>
+                    <div class="bg_img_custom_setting icon-plus" title="自定义设置背景">
+                        <div class="bg_img_upload_progress"></div>
+                    </div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_2.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_6.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_7.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_8.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_10.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_13.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div class="bg_img_list" style="background: url(../../upload_avatar/bg_img/bg_25.jpg)"><div class="bg_img_content"><div class="bg_review" title="预览">预览</div><div class="bg_used" title="应用">应用</div></div></div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+            <div class="div_setting_panle_bottom"></div>
+        </div>
+        <div class="index_swf">
+            <embed style="z-index: 1000000;position: fixed;top: 0px;cursor: pointer" width="100%" height="100%"  name="plugin" src="../../assets/global/img/index_swf.swf" type="application/x-shockwave-flash" wmode='opaque' quality='high'>
+            <div class="index_swf_inner"></div>
+        </div>
+
+        <div class="oncontextMenu">
+            <div class="menu_list" v="1">
+                <div class="menu_list_icon icon-reload"></div>
+                <div class="menu_list_text">刷新页面</div>
+            </div>
+        </div>
+
+    </body>
+
+    <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.mousewheel.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+    <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+    <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery.form.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-jcrop/js/jquery.jcrop.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jquery-jcrop/js/avatarCutter.js" type="text/javascript"></script>
+    <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+    <script src="../../assets/global/plugins/spectrum/spectrum.js"></script>
+    <script>
+        document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        document.write("<script src='../../assets/local/center/personal_center.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+    </script>
+    <!--<script src='../../assets/local/ycoa.js' type='text/javascript'></script>-->
+    <!--<script src="../../assets/local/center/personal_center.js" type="text/javascript"></script>-->
+</html>

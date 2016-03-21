@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-装修业绩</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datetimepicker/css/datetimepicker.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/center.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body>
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加装修业绩信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_decoration_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="quick_write">快捷填单</label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="quick_write" placeholder="输入 旺旺/QQ/姓名/客户支付宝后回车自动补全"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">旺旺名<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="ww" id="ww" placeholder="旺旺名"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="qq">QQ号<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ号"/>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">                                    
+                                    
+                                    <label class="control-label col-md-2" for="phone">手机号码<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="手机号码"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="customer">售后<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" readonly="" class="form-control" name="customer" id="customer" placeholder="售后"/>
+                                        <input type="hidden" name="customer_id" id="customer_id"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="decoration_packages">装修套餐<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="decoration_packages" id="decoration_packages" placeholder="装修套餐"/>
+                                    </div>
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="decoration_price">装修金额<span class="required">*</span></label>
+                                    <div class="col-md-3" >
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="decoration_price" id="decoration_price" placeholder="装修金额"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="p_arrears">欠款</label>
+                                    <div class="col-md-3" >
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="p_arrears" id="p_arrears" placeholder="欠款"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="alipay_account">客户支付宝<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="alipay_account" id="alipay_account" placeholder="客户支付宝"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="payment_method">收款方式<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="只复制支付宝+姓名"/>
+                                    </div>
+                                    
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="name">转款人姓名<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="转款人姓名" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="tra_num" id="label_tra_num">交易/订单号<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="tra_num" id="tra_num" placeholder="交易/订单号"/>
+                                        </div>
+                                    </div>
+                                     <div id="add_time_manager" style="display:none;">
+                                        <label class="control-label col-md-2 wctdy_red_bold_label" id="add_time" for="add_time">添加时间<span class="required">*</span></label>
+                                        <div class="col-md-3">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" class="form-control date-time-picker-bind-mouseover" data-date-format="yyyy-mm-dd hh:ii:ss" name="add_time" id="add_time" placeholder="添加时间">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="remark">备注</label>
+                                    <div class="col-md-8">
+                                        <div class="form-control auto_paste_img" name="remark" id="remark" placeholder="备注" contenteditable="true" title="请将图片粘贴到此处"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                            <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="fillModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加装修业绩补欠款信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_fillarrears_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="qq">QQ号<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa fa-warning" data-original-title="This field is required."></i>
+                                            <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ/WW(输入QQ或者WW后回车,自动补全表单)" aria-required="true" aria-invalid="true">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="fill_sum">补欠款金额<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="fill_sum" id="fill_sum" placeholder="补欠款金额">
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="phone">手机号码<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="mobile" id="phone" placeholder="手机号码">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">旺旺名<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="ww" id="ww" placeholder="旺旺名">
+                                            <input type="hidden" name="parent_id" id="parent_id">
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="name">转款人姓名<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="转款人姓名">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="tra_num">交易/订单号<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" name="tra_num" id="tra_num" placeholder="交易/订单号">
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2 wctdy_red_bold_label" for="payment_method">收款方式<span class="required" aria-required="true">*</span></label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="只复制支付宝+姓名"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="customer">售后</label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" readonly="" class="form-control" name="customer" id="customer" placeholder="售后"/>
+                                            <input type="hidden" name="customer_id" id="customer_id">
+                                        </div>
+                                    </div>
+                                     <div id="add_time_manager" style="display:none;">
+                                        <label class="control-label col-md-2 wctdy_red_bold_label" id="add_time" for="add_time">添加时间<span class="required">*</span></label>
+                                        <div class="col-md-3">
+                                            <div class="input-icon right">
+                                                <i class="fa"></i>
+                                                <input type="text" class="form-control date-time-picker-bind-mouseover" data-date-format="yyyy-mm-dd hh:ii:ss" name="add_time" id="add_time" placeholder="添加时间">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="remark">备注</label>
+                                    <div class="col-md-8">
+                                        <div class="form-control auto_paste_img" name="remark" id="remark_fillarrears" placeholder="备注" contenteditable="true" title="请将图片粘贴到此处"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn_submit_fill_primary">保存</button>
+                            <button type="button" class="btn btn-default" id="btn_close_fill_primary" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg in" id="myexcelModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content ui-draggable">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">导出EXCEL</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="toexcel_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">开始日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="start_time" id="start_time" placeholder="开始时间" aria-required="true" aria-invalid="true">
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="name">结束日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="end_time" id="end_time" placeholder="结束时间" aria-required="true" aria-invalid="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_toexcel_primary">确认导出</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">二次销售</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">装修业绩</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="permit_buttons" style="float: left;">
+                <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_3050301" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加装修业绩</button>
+                <button type="button" id="open_dialog_fill_btn" class="btn red-sunglo permit_3050305" data-toggle="modal" data-target="#fillModal"><i class="fa fa-plus"></i>添加补欠款</button>
+                <button type="button" id="outexcel" class="btn red-sunglo permit_3050306" data-toggle="modal" data-target="#myexcelModal"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+                <button type="button" id="show_ranking" class="btn red-sunglo"><i class="glyphicon glyphicon-sort-by-attributes-alt"></i>查看排行榜</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i>
+                        装修业绩列表
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='add_time'>日期</th>
+                                <th sort='ww'>旺旺名</th>
+                                <th sort='qq'>QQ号</th>
+                                <th sort='name'>转款人姓名</th>
+                                <th sort="phone">手机号码</th>
+                                <th sort='decoration_packages'>装修套餐</th>
+                                <th sort='decoration_price'>装修金额</th>
+                                <th sort='alipay_account'>客户支付宝</th>
+                                <th sort='payment_method'>收款方式</th>
+                                <th sort='customer'>售后名称</th>
+                                <th sort='tra_num'>交易/订单号</th>
+                                <th sort='status'>状态</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:decorationList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:id">
+                                </td>
+                                <td data-bind="text:add_time"></td>
+                                <td data-bind="text:ww"></td>
+                                <td data-bind="text:qq"></td>
+                                <td data-bind="text:name"></td>
+                                <td data-bind="text:phone"></td>
+                                <td data-bind="text:decoration_packages"></td>
+                                <td data-bind="text:decoration_price"></td>
+                                <td data-bind="text:alipay_account"></td>
+                                <td data-bind="text:payment_method"></td>
+                                <td data-bind="text:customer"></td>
+                                <td data-bind="attr:{title:tra_num}">
+                                    <div style="margin: 0 auto;max-width: 200px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" data-bind="text:tra_num"></div>
+                                </td>
+                                <td>
+                                    <span data-bind="if:status==1" class="label label-info">已补</span>
+                                </td>
+                                <td data-bind="attr:{'id':'customer_td_'+id}">
+                                     <!--ko if:te-->
+                                    <span data-bind="click:$root.doTe" aria-hidden="true" class="glyphicon glyphicon-ok" style="cursor: pointer;margin-left: 10px;" title="审核通过"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:dele-->
+                                    <span data-bind="click:$root.delDecoration" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!--/ko-->
+                                    <!--ko if:edit-->
+                                    <span data-bind="click:$root.editDecoration" aria-hidden="true" class="icon-note" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <!--/ko-->
+                                    <!--ko if:show-->
+                                    <span data-bind="click:$root.showDecoration" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!--/ko-->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="2"></td>
+                                <td colspan="8">
+                                    <form data-bind="attr:{'id':'form_'+id}">
+                                        <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>添加时间:</th>
+                                                <td>
+                                                    <input type="text" class="form-control date-time-picker-bind-mouseover" readonly="" name="add_time" id="add_time" placeholder="添加时间" data-bind="value:add_time">
+                                                </td>
+                                                <th>旺旺名：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="ww" id="ww" placeholder="旺旺名" data-bind="value:ww"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>QQ号：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ号" data-bind="value:qq"/>
+                                                </td>    
+                                                <th>转款人姓名：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="name" id="name" placeholder="转款人姓名" data-bind="value:name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>手机号码：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="手机号码" data-bind="value:phone"/>
+                                                </td>
+                                                <th>装修套餐:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="decoration_packages" id="decoration_packages" placeholder="装修套餐" data-bind="value:decoration_packages"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>装修金额:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="decoration_price" id="decoration_price" placeholder="装修金额" data-bind="value:decoration_price">
+                                                </td>
+                                                <th>客户支付宝:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="alipay_account" id="alipay_account" placeholder="客户支付宝" data-bind="value:alipay_account">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>收款方式:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="payment_method" id="payment_method" placeholder="收款方式" data-bind="value:payment_method">
+                                                </td>
+                                                <th>欠款:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="p_arrears" id="p_arrears" placeholder="欠款" data-bind="value:p_arrears">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>交易/订单号:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="tra_num" id="tra_num" placeholder="交易/订单号" data-bind="value:tra_num">
+                                                </td>
+                                                <th>售后:</th>
+                                                <td>
+                                                    <input type="text" readonly="" class="form-control" name="customer" id="customer" placeholder="售后" data-bind="value:customer">
+                                                    <input type="hidden" name="customer_id" id="customer_id" data-bind="value:customer_id">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>备注:</th>
+                                                <td colspan="5">
+                                                    <div class="form-control auto_paste_img" name="remark" id="remark_edit" placeholder="备注" contenteditable="true" title="请将图片粘贴到此处" data-bind="html:remark"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn decoration_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id},click:$root.doEditSubmit">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="4"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div_avatar_outer">
+            <div class="div_avatar_close">
+                <div class="div_avatar_close_title">关系数据选择</div>
+                <div class="div_avatar_close_btn" title="关闭">X</div>
+            </div>
+            <div class="div_avatar_content">
+                <div class="auto_thead">
+                    <div class="auto_th">添加时间</div>
+                    <div class="auto_th">旺旺</div>
+                    <div class="auto_th">QQ</div>
+                    <div class="auto_th">手机号码</div>
+                    <div class="auto_th">转款人姓名</div>
+                    <div class="auto_th">交易/订单号</div>
+                    <div class="auto_th">售后</div>
+                </div>
+                <div class="auto_tbody">
+                </div>
+            </div>
+            <div class="div_avatar_bottom"></div>
+        </div>
+        <div class="auto_tab_main" t="0">
+            <div class="auto_tab_close">
+                <div class="title">销售排行榜</div>
+                <div class="close_btn" title="关闭">x</div>
+            </div>
+            <div style="height: 40px;line-height: 40px;padding-left: 17px;">
+                <input id="auto_tab" value="1,2,3" checkMore='true'/>
+            </div>
+            <div class="auto_tab_title">
+                <ul>
+                    <li class="select" var="1">当天</li>
+                    <li var="2">近七天</li>
+                    <li var="3">当月</li>
+                </ul>
+            </div>
+            <div class="auto_tab_context">
+                <div class="open" var="1"></div>
+                <div class="" var="2"></div>
+                <div class="" var="3"></div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/second_sale/decoration.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/second_sale/decoration-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/second_sale/decoration.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/second_sale/decoration-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html> 

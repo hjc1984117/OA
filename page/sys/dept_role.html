@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-权限管理</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/dept_role.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">系统设置</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">部门/角色管理</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="add_dept_btn" class="btn red-sunglo permit_3010201"><i class="fa fa-plus"></i>添加部门</button>
+            <button type="button" id="add_role_btn" class="btn red-sunglo permit_3010202"><i class="fa fa-plus"></i>添加岗位</button>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="glyphicon glyphicon-bullhorn"></i>
+                        权限管理
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="permit_main">
+                        <div class="jstree_dept">
+
+                        </div>
+                        <div class="rolelist_items">
+
+                        </div>
+                        <div class="permitlist_items">
+                            <table id="dept_table">
+                                <tr>
+                                    <th colspan="2">部门详细</th>
+                                </tr>
+                                <tr>
+                                    <th>部门名称:</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="hidden" id="dept_id">
+                                            <input type="text" id="dept_text" class="form-control" placeholder="部门名称">
+                                            <span class="input-group-addon" id="clearDeptName">
+                                                <i class="fa fa-trash-o"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-primary submit_btn dept_submit_btn">提交</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="role_table">
+                                <tr>
+                                    <th colspan="2">岗位详细</th>
+                                </tr>
+                                <tr>
+                                    <th>所属部门:</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" id="dept1_text" readonly="" class="form-control" placeholder="所属部门">
+                                            <input type="hidden" id="dept1_id">
+                                            <input type="hidden" id="dept2_id">
+                                            <span class="input-group-addon" id="clearDept">
+                                                <i class="fa fa-trash-o"></i>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>岗位名称:</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="hidden" id="role_id">
+                                            <input type="text" id="role_text" class="form-control" placeholder="岗位名称">
+                                            <span class="input-group-addon" id="clearRoleName">
+                                                <i class="fa fa-trash-o"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>岗位股份(%):</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" id="shares" class="form-control" placeholder="岗位股份(%)">
+                                            <span class="input-group-addon" id="clearShares">
+                                                <i class="fa fa-trash-o"></i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-primary submit_btn role_submit_btn">提交</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/sys/dept_role.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sys/dept_role.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

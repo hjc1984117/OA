@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-电话记录</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加电话记录</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_phone_sys_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="phone">电话号码</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="电话号码"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="city">城市</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <select class="form-control" name="city" id="city">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="area">地区</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <select class="form-control" name="area" id="area">
+                                            <option value="请选择">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="phone_type">使用手机型号</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="phone_type" id="phone_type" placeholder="使用手机型号"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="setmeal">套餐内容</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <textarea class="form-control" name="setmeal" id="setmeal" placeholder="套餐内容"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="use_username">使用人员</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="use_username" id="use_username" placeholder="使用人员"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="bind_shop">绑定店铺</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" readonly="" name="bind_shop" id="bind_shop" placeholder="绑定店铺"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="used">用途</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="used" id="used" placeholder="用途"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="is_arrearage">是否欠费</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="is_arrearage" id="is_arrearage" placeholder="是否欠费"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="au_name">电话卡认证姓名</label>
+                                <div class="col-md-7">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="au_name" id="au_name" placeholder="电话卡认证姓名"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="javascript:$('#add_phone_sys_form').submit();" id="btn_cashback_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_cashback" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myexcelModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">导出EXCEL</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="toexcel_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">开始日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="start_time" id="start_time"  placeholder="开始时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="name">结束日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="end_time" id="end_time"  placeholder="结束时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_toexcel_primary">确认导出</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">销售统计</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">投诉记录</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_3031001" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加电话记录</button>
+            <button type="button" id="outexcel" class="btn red-sunglo permit_3031005" data-toggle="modal" data-target="#myexcelModal"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i>
+                        投诉记录
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='addtime'>添加日期</th>
+                                <th sort='phone'>电话号码</th>
+                                <th>城市/地区</th>
+                                <th sort='phone_type'>使用手机类型</th>
+                                <th sort='setmeal'>套餐内容</th>
+                                <th sort='use_username'>使用人员</th>
+                                <th sort='bind_shop'>绑定店铺</th>
+                                <th sort='used'>用途</th>
+                                <th sort='is_arrearage'>是否欠费</th>
+                                <th sort='au_name'>电话卡认证姓名</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:phoneSysList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:id">
+                                </td>
+                                <td data-bind="text:addtime"></td>
+                                <td data-bind="text:phone"></td>
+                                <td data-bind="text:city+area"></td>
+                                <td data-bind="text:phone_type"></td>
+                                <td data-bind="attr:{title:setmeal}">
+                                    <div style="margin: 0 auto;max-width: 200px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" data-bind="text:setmeal"></div>
+                                </td>
+                                <td data-bind="text:use_username"></td>
+                                <td data-bind="text:bind_shop"></td>
+                                <td data-bind="text:used"></td>
+                                <td data-bind="text:is_arrearage"></td>
+                                <td data-bind="text:au_name"></td>
+                                <td>
+                                    <!-- ko if:dele -->
+                                    <span data-bind="click:$root.delPhoneSys" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:edit-->
+                                    <span data-bind="click:$root.editPhoneSys,attr:{'val':id}" aria-hidden="true" class="icon-note data_list_div" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:show-->
+                                    <span data-bind="click:$root.showPhoneSys" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="2"></td>
+                                <td colspan="7">
+                                    <form data-bind="attr:{'id':'form_'+id}">
+                                        <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>电话号码：</th>
+                                                <td>
+                                                    <input type="text" class="form-control"  placeholder="电话号码" name="phone" id="phone" data-bind="value:phone"/>
+                                                </td>
+                                                <th>使用手机型号：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="phone_type" id="phone_type" placeholder="使用手机型号" data-bind="value:phone_type"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>城市：</th>
+                                                <td>
+                                                    <input type="text" readonly="" class="form-control" name="city" id="city" data-bind="value:city">
+                                                </td>
+                                                <th>地区：</th>
+                                                <td>
+                                                    <input type="text" readonly="" class="form-control" name="area" id="area" data-bind="value:area">
+                                                </td>                                                
+                                            </tr>
+                                            <tr>
+                                                <th>套餐内容：</th>
+                                                <td colspan="3">
+                                                    <textarea type="text" class="form-control" name="setmeal" id="setmeal" placeholder="套餐内容" data-bind="value:setmeal"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>使用人员：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="use_username" id="use_username" placeholder="使用人员" data-bind="value:use_username"/>
+                                                </td>
+                                                <th>绑定店铺：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" readonly="" name="bind_shop" id="bind_shop" placeholder="绑定店铺"  data-bind="value:bind_shop"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>用途：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="used" id="used" placeholder="用途" data-bind="value:used"/>
+                                                </td>
+                                                <th>是否欠费：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="is_arrearage" id="is_arrearage" placeholder="是否欠费"  data-bind="value:is_arrearage"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>电话卡认证姓名：</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="au_name" id="au_name" placeholder="电话卡认证姓名" data-bind="value:au_name"/>
+                                                </td>
+                                                <th></th>
+                                                <td></td>
+                                            </tr>
+                                            <td colspan="6">
+                                                <button type="button" class="btn btn-primary submit_btn dept_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id,'val':id},click:$root.doEditPhoneSys">提交</button>
+                                                <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                            </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+//                            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+//                            document.write("<script src='../../assets/local/sale_soft/phone_sys.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+//                            document.write("<script src='../../assets/local/sale_soft/phone_sys-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <script src="../../assets/local/ycoa.js" type="text/javascript"></script>
+        <script src="../../assets/local/sale_soft/area.js" type="text/javascript"></script>
+        <script src="../../assets/local/sale_soft/phone_sys.js" type="text/javascript"></script>
+        <script src="../../assets/local/sale_soft/phone_sys-form-validate.js" type="text/javascript"></script>
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

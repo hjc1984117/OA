@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-补卡(补签)记录</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" type="image/ico" href="../../assets/global/img/favicon.ico">
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加补卡(补签)记录</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注: 标有<span style="color: red;">*</span>符号的字段为必填项
+                        </div>
+                        <form id="add_resign_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="username">员工姓名<span style="color: red;">*</span></label>
+                                    <div class="col-md-5">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control" readonly="" name="username" id="username" placeholder="员工姓名" aria-required="true" aria-invalid="false"/>
+                                            <input type="hidden" name="userid" id="userid"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="signtype">补卡(补签)类型<span style="color: red;">*</span></label>
+                                    <div class="col-md-5" style="margin-top: 6px;">
+                                        <i class="fa"></i>
+                                        <label><input type="radio" checked="" name="signtype" id="signtype0" value="0">签到</label>
+                                        <label><input type="radio" name="signtype" id="signtype1" value="1">签退</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="signdate">补卡(补签)时间<span style="color: red;">*</span></label>
+                                    <div class="col-md-5" style="margin-top: -15px;">
+                                        <i class="fa"></i>
+                                        <input class="form-control timepicker-24" style="width: 100px;margin-left: 8px;margin-top: 18px;float: right;" readonly="" type="text" name="sign_date" id="sign_date" placeholder="时间"/>
+                                        <input class="form-control date-picker-bind-mouseover" style="width: 110px;" readonly="" data-date-format="yyyy-mm-dd" type="text" name="signdate" id="signdate" placeholder="日期"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3" for="reason">补签原因<span style="color: red;">*</span></label>
+                                    <div class="col-md-5" style="margin-top: -15px;">
+                                        <i class="fa"></i>
+                                        <textarea class="form-control" name="reason" id="reason" placeholder="请填写具体原因，否则不予批复(8字以上)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_submit_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myexcelModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">导出EXCEL</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="toexcel_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">开始日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover" readonly="" data-date-format="yyyy-mm-dd" name="start_time" id="start_time"  placeholder="开始时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="name">结束日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover" readonly="" data-date-format="yyyy-mm-dd" name="end_time" id="end_time"  placeholder="结束时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_toexcel_primary">确认导出</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type='hidden' id="deptid"/>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">考勤管理</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">补卡(补签)记录</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_1020501" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加补卡(补签)记录</button>
+            <button type="button" id="outexcel" class="btn red-sunglo permit_1020502" data-toggle="modal" data-target="#myexcelModal"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="glyphicon glyphicon-bullhorn"></i>
+                        补卡(补签)
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='username'>姓名</th>
+                                <th>所属部门</th>
+                                <!--<th>所属二级部门</th>-->
+                                <th sort='signtype'>补卡(补签)类型</th>
+                                <th sort='signdate'>补卡(补签)时间</th>
+                                <th sort='addtime'>添加时间</th>
+                                <th>补签原因</th>
+                                <th>状态</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:resignList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:id">
+                                </td>
+                                <td data-bind="text:username"></td>
+                                <td data-bind="attr:{'dept1_id':dept1_id},text:dept1_text"></td> 
+                                <!--<td data-bind="attr:{'dept1_id':dept2_id},text:dept2_text"></td>-->
+                                <td>
+                                    <span data-bind="if:signtype==0" class="label label-warning">签到</span>
+                                    <span data-bind="if:signtype==1" class="label label-info">签退</span>
+                                </td>
+                                <td data-bind="text:signdate+' '+sign_date"></td>
+                                <td data-bind="text:addtime"></td>
+                                <td data-bind="text:reason"></td>
+                                <td class="data_list_div" data-bind="attr:{'val':id}">
+                                    <span data-bind="text:status_text, css:status_style"></span>
+                                </td>
+                                <td>
+                                    <!--ko if:opts.selfDelete-->
+                                    <span data-bind="click:$root.selfDelete" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 5px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:opts.selfEdit-->
+                                    <span data-bind="click:$root.selfEdit" aria-hidden="true" class="icon-note" style="cursor: pointer;margin-left: 5px;" title="编辑"></span>
+                                    <!-- /ko -->
+                                    <span data-bind="click:$root.show" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 5px;" title="查看"></span>
+                                    <!--ko if:opts.selfOk-->
+                                    <span data-bind="click:$root.updateResign" aria-hidden="true" class="glyphicon glyphicon-ok" style="cursor: pointer;margin-left: 5px;" title="本人确定"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:opts.deptManagerOk-->
+                                    <span data-bind="click:$root.updateResign" aria-hidden="true" class="glyphicon glyphicon-arrow-up" style="cursor: pointer;margin-left: 5px;" title="部门经理审核"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:opts.hrManagerOk-->
+                                    <span data-bind="click:$root.updateResign" aria-hidden="true" class="glyphicon glyphicon-arrow-up" style="cursor: pointer;margin-left: 5px;" title="行政审核"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:opts.stop-->
+                                    <span data-bind="click:$root.stop" aria-hidden="true" class="fa fa-pause" style="cursor: pointer;margin-left: 5px;" title="终止"></span>
+                                    <div class="cu_div" data-bind="attr:{'id':'doback_'+id}">
+                                        <textarea></textarea>
+                                        <span class="input-group-addon" id="managerStopSub" data-bind="click:$root.managerStopSub"><i class="glyphicon glyphicon-ok" title="提交"></i></span>
+                                        <span class="input-group-addon" id="managerStopClose" data-bind="click:$root.managerStopClose"><i class="glyphicon glyphicon-remove" title="取消"></i></span>
+                                    </div>                                    
+                                    <!-- /ko -->
+                                    <!--ko if:opts.hrManagerDelete-->
+                                    <span data-bind="click:$root.selfDelete" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 5px;" title="行政删除"></span>
+                                    <!-- /ko -->
+                                    <div class="workflowLog_detail" data-bind="attr:{'id':'workflowLog_detail_'+id}">
+                                        <img src="../../assets/global/img/input-spinner.gif" style="margin-top: 130px">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="3"></td>
+                                <td colspan="3">
+                                    <form data-bind="attr:{'id':'form_'+id}">
+                                        <table class="table second_table">
+                                            <tr>
+                                                <th>姓名:</th>
+                                                <td>
+                                                    <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                                    <input type="text" class="form-control" readonly="" name="username" id="username" placeholder="姓名" data-bind="value:username"/>
+                                                </td>
+                                                <th>所属部门:</th>
+                                                <td>
+                                                    <input type="text" class="form-control" readonly="" name="dept2_text" id="dept2_text" placeholder="所属部门" data-bind="value:dept2_text"/>
+                                                    <input type="hidden" name="dept2_id" id="dept2_id" data-bind="value:dept2_id"/>
+                                                    <input type="hidden" name="dept1_id" id="dept2_text" data-bind="value:dept1_id"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>类型:</th>
+                                                <td>
+                                                    <div style="float: left;">
+                                                        <label><input type="radio" name="signtype" id="signtype1" value="0" data-bind="checked:signtype"> 签到 </label>
+                                                        <label><input type="radio" name="signtype" id="signtype2" value="1" data-bind="checked:signtype"> 签退 </label>
+                                                    </div>
+                                                </td>
+                                                <th>补卡(补签)时间:</th>
+                                                <td>
+                                                    <input type="text" class="form-control timepicker-24" style="width: 145px;margin-left: -135px;float: right;" readonly="" data-date-format="hh:ii" name="sign_date" id="sign_date" placeholder="日期" data-bind="value:sign_date">
+                                                    <input type="text" class="form-control date-picker-bind-mouseover" style="width: 200px;" readonly="" data-date-format="yyyy-mm-dd" name="signdate" id="signdate" placeholder="时间" data-bind="value:signdate">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>补签原因:</th>
+                                                <td colspan="3">
+                                                    <textarea class="form-control" name="reason" id="reason" placeholder="理由" data-bind="value:reason"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <button type="button" class="btn btn-primary submit_btn form_submit_btn" style="display: none" data-bind="attr:{'id':'submit_'+id,'val':id}">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="paging-container" style="overflow: "></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script>
+            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/attendance/resign.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+            document.write("<script src='../../assets/local/attendance/resign-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/attendance/resign.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/attendance/resign-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8"/>
+        <title>星密码OA管理系统-投诉记录</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="" name="description"/>
+        <meta content="" name="author"/>
+        <link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-datepicker/css/datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-toastr/toastr.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css">
+        <link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-select/bootstrap-select.min.css">
+        <!-- BEGIN THEME STYLES -->
+        <link href="../../assets/local/css/components.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/plugins.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/local/css/base.css" rel="stylesheet" type="text/css"/>
+        <!-- END THEME STYLES -->
+        <link rel="shortcut icon" href="../../assets/global/img/favicon.ico"/>
+    </head>
+    <body style="background: #ffffff;margin: 0px;padding: 0px;">
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">添加投诉记录</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success">
+                            <span style="color: red;">*</span>注:   带有"<span style="color: red;">*</span>"的字段为必填项
+                        </div>
+                        <form id="add_complaint_record_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="quick_write">快捷填单</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="quick_write" placeholder="输入 旺旺/QQ/姓名/手机号码后回车自动补全">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="ww">优先级</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <select class="form-control" name="priority_lv" id="priority_lv">
+                                            <option value="3">一般</option>
+                                            <option value="2">急</option>
+                                            <option value="1">特急</option>
+                                        </select>                                        
+                                    </div>
+                                </div>
+                                <label class="control-label col-md-2" for="ac_name">客户姓名</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="ac_name" id="ac_name" placeholder="客户姓名"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="ww">旺旺号</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="ww" id="ww" placeholder="旺旺号"/>
+                                    </div>
+                                </div>
+                                <label class="control-label col-md-2" for="qq">QQ号</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ号"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="shop">所属店铺<span style="color: red;">*</span></label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="shop" id="shop" placeholder="所属店铺"/>
+                                    </div>
+                                </div>
+                                <label class="control-label col-md-2" for="phone">来电号码</label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="来电号码"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="complaint_custom">投诉客服<span style="color: red;">*</span></label>
+                                <div class="col-md-3">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text"  class="form-control" name="complaint_custom" id="complaint_custom" placeholder="投诉客服"/>
+                                    </div>
+                                </div>
+                                <label class="control-label col-md-2" for="hand_personnel">处理人员</label>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" readonly="" name="hand_personnel" id="hand_personnel" placeholder="处理人员"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="complaint_source" >投诉来源</label>
+                                <div class="col-md-8">
+                                    <input type="text"  class="form-control not-clear" name="complaint_source" id="complaint_source" placeholder="投诉来源" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="complaint_content">投诉内容</label>
+                                <div class="col-md-8">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <div contenteditable="true" name="complaint_content" id="complaint_content"  class="col-md-13" style="overflow: auto;height: 150px;padding: 5px;border: solid 1px #f3f3f3;outline: none;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="hand_result_outer">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="hand_result">处理结果</label>
+                                    <div class="col-md-8">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <textarea class="form-control" name="hand_result" id="hand_result" placeholder="处理结果"></textarea>
+                                        </div>
+                                    </div>
+                                    <span class="fa fa-plus" id="add_hand_result" style="cursor: pointer;margin-top: 20px;" title="添加处理结果"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="remark">备注</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" name="remark" id="remark" placeholder="备注"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="javascript:$('#add_complaint_record_form').submit();" id="btn_cashback_primary">保存</button>
+                        <button type="button" class="btn btn-default" id="btn_close_cashback" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myexcelModal" tabindex="-1" role="dialog" aria-hidden="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">导出EXCEL</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="toexcel_form" class="form-horizontal" novalidate="novalidate">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ww">开始日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="start_time" id="start_time"  placeholder="开始时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-2" for="name">结束日期<span class="required">*</span></label>
+                                    <div class="col-md-3">
+                                        <div class="input-icon right">
+                                            <i class="fa"></i>
+                                            <input type="text" class="form-control date-picker-bind-mouseover not-clear" readonly="" data-date-format="yyyy-mm-dd" name="end_time" id="end_time"  placeholder="结束时间" aria-required="true" aria-invalid="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_toexcel_primary">确认导出</button>
+                        <button type="button" class="btn btn-default" id="btn_close_primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-bar">
+            <ul class="page-breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Home</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">销售统计</a><i class="fa fa-angle-right"></i></li>
+                <li><a href="#">投诉记录</a></li>
+            </ul>
+        </div>
+        <div class="permit_buttons">
+            <button type="button" id="open_dialog_btn" class="btn red-sunglo permit_2011201" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>添加投诉记录</button>
+            <button type="button" id="outexcel" class="btn red-sunglo permit_2011205" data-toggle="modal" data-target="#myexcelModal"><i class="glyphicon glyphicon-arrow-down"></i>导出EXCEL</button>
+        </div>
+        <div class="col-md-12">
+            <div class="portlet box red-sunglo">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-users" ></i>
+                        投诉记录
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <table class="table table-hover" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="checkbox" id="checkall">
+                                </th>
+                                <th sort='addtime'>添加日期</th>
+                                <th sort='priority_lv'>优先等级</th>
+                                <th sort='complaint_source'>投诉来源</th>
+                                <th sort='ac_name'>客户姓名</th>
+                                <th sort='ww'>旺旺号</th>
+                                <th sort='shop'>所属店铺</th>
+                                <th sort='qq'>QQ</th>
+                                <th sort='phone'>来电号码</th>
+                                <th sort='complaint_custom'>投诉客服</th>
+                                <th sort='hand_personnel'>处理人员</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach:complaintRecordList">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="checkbox" data-bind="value:id">
+                                </td>
+                                <td data-bind="text:addtime"></td>
+                                <td>
+                                    <span data-bind="if:priority_lv==1" class="label label-danger">特急</span>
+                                    <span data-bind="if:priority_lv==2" class="label label-warning">急</span>
+                                    <span data-bind="if:priority_lv==3" class="label label-success">一般</span>
+                                </td>
+                                <td data-bind="text:complaint_source"></td>
+                                <td data-bind="text:ac_name"></td>
+                                <td data-bind="text:ww"></td>
+                                <td data-bind="attr:{title:shop}">
+                                    <div style="margin: 0 auto;max-width: 170px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" data-bind="text:shop"></div>
+                                </td>
+                                <td data-bind="text:qq"></td>
+                                <td data-bind="text:phone"></td>
+                                <td data-bind="text:complaint_custom"></td>
+                                <td data-bind="text:hand_personnel"></td>
+                                <td>
+                                    <!-- ko if:dele -->
+                                    <span data-bind="click:$root.delComplaintRecord" aria-hidden="true" class="icon-trash" style="cursor: pointer;margin-left: 10px;" title="删除"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:edit-->
+                                    <span data-bind="click:$root.editComplaintRecord,attr:{'val':id}" aria-hidden="true" class="icon-note data_list_div" style="cursor: pointer;margin-left: 10px;" title="编辑"></span>
+                                    <!-- /ko -->
+                                    <!--ko if:show-->
+                                    <span data-bind="click:$root.showComplaintRecord" aria-hidden="true" class="icon-magnifier" style="cursor: pointer;margin-left: 10px;" title="查看"></span>
+                                    <!-- /ko -->
+                                    <span data-bind="click:$root.showLog" aria-hidden="true" class="icon-eye" style="cursor: pointer;margin-left: 10px;" title="查看日志"></span>
+                                    <div class="dataLog_detail" data-bind="attr:{'id':'dataLog_detail_'+id}">
+                                        <img src="../../assets/global/img/input-spinner.gif" style="margin-top: 130px">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="display: none;" class="second_tr" data-bind="attr:{'id':'tr_'+id}">
+                                <td colspan="2"></td>
+                                <td colspan="8">
+                                    <div class="modal-body" style="background: #fff;">
+                                        <form class="form-horizontal" data-bind="attr:{'id':'form_'+id}">
+                                            <input type="hidden" name="id" id="id" data-bind="value:id"/>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">优先等级：</label>
+                                                <div class="col-md-4">
+                                                    <select class="form-control" name="priority_lv" id="priority_lv" aria-invalid="false" data-bind="value:priority_lv">
+                                                        <option value="3">一般</option>
+                                                        <option value="2">急</option>
+                                                        <option value="1">特急</option>
+                                                    </select>
+                                                </div>
+                                                <label class="control-label col-md-2">客户姓名:</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control"  placeholder="客户姓名" name="ac_name" id="ac_name" data-bind="value:ac_name"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">旺旺：</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control"  placeholder="旺旺" name="ww" id="ww" data-bind="value:ww"/>
+                                                </div>
+                                                <label class="control-label col-md-2">QQ：</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="qq" id="qq" placeholder="QQ" data-bind="value:qq"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">所属店铺：</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="shop" id="shop" placeholder="所属店铺" data-bind="value:shop"/>
+                                                </div>
+                                                <label class="control-label col-md-2">来电号码：</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="来电号码" data-bind="value:phone"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2">投诉客服：</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="complaint_custom" id="complaint_custom" placeholder="投诉客服" data-bind="value:complaint_custom"/>
+                                                </div>
+                                                <label class="control-label col-md-2">处理人员：</label>
+                                                <div class="col-md-4">
+                                                    <input class="form-control" name="hand_personnel" id="hand_personnel" readonly="" placeholder="处理人员" data-bind="value:hand_personnel"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2" for="complaint_source" >投诉来源：</label>
+                                                <div class="col-md-8">
+                                                    <input type="text"  class="form-control not-clear" name="complaint_source" id="complaint_source" placeholder="投诉来源" data-bind="value:complaint_source" />
+                                                </div>
+                                            </div>
+                                            <div class="complaint_content_outer" data-bind="foreach:complaint_content">
+                                                <div class="complaint_content_item" style="border: solid 1px #ccc;padding: 5px;margin-bottom: 5px;">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-md-2">
+                                                            <!-- ko if:$index()==0 -->
+                                                            <span class="fa fa-plus add_complaint_content" style="cursor: pointer;margin-top: 20px;" title="添加投诉内容"></span>
+                                                            <!-- /ko -->
+                                                            <!-- ko if:$index()!=0 -->
+                                                            <span class="glyphicon glyphicon-minus remove_complaint_content" style="cursor: pointer;margin-top: 20px;" title="添加投诉内容"></span>
+                                                            <!-- /ko -->
+                                                            投诉内容：
+                                                        </label>
+                                                        <div class="col-md-10">
+                                                            <div contenteditable="true" name="complaint_content" class="complaint_content" id="complaint_content" style="overflow: auto;text-align: left;height: 150px;padding: 5px;border: solid 1px #f3f3f3;outline: none;" data-bind="html:complaint_content"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hand_result_outer" data-bind="foreach:hand_result">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">
+                                                                <!-- ko if:$index()==0 -->
+                                                                <span class="fa fa-plus add_hand_result" style="cursor: pointer;margin-top: 20px;" title="添加处理结果"></span>
+                                                                <!-- /ko -->
+                                                                <!-- ko if:$index()!=0 -->
+                                                                <span class="glyphicon glyphicon-minus remove_hand_result" style="cursor: pointer;margin-top: 20px;" title="添加处理结果"></span>
+                                                                <!-- /ko -->
+                                                                处理结果：
+                                                            </label>
+                                                            <div class="col-md-10">
+                                                                <textarea class="form-control" name="hand_result" id="hand_result" placeholder="处理结果" data-bind="value:text"/></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-2" for="remark">备注</label>
+                                                <div class="col-md-10">
+                                                    <textarea class="form-control" name="remark" id="remark" placeholder="备注" data-bind="value:remark"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-primary submit_btn dept_submit_btn" style="display: none;" data-bind="attr:{'id':'submit_'+id,'val':id},click:$root.doEditComplaintRecord">提交</button>
+                                                    <button type="button" class="btn btn-info cancel_btn" style="display: none;" data-bind="attr:{'id':'cancel_'+id},click:$root.cancelTr">取消</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                    </table>
+                    <div id="paging-container"></div>
+                </div>
+            </div>
+        </div>
+        <script src="../../assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+
+        <script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>
+        <script src="../../assets/local/plugins/json.js" type="text/javascript"></script>
+        <script src="../../assets/local/plugins/base64encode.js" type="text/javascript"></script>
+        <script src="../../assets/local/knockout/knockout-3.1.0.js" type="text/javascript"></script>
+        <script>
+                            document.write("<script src='../../assets/local/ycoa.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+                            document.write("<script src='../../assets/local/sale/complaint_record.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+                            document.write("<script src='../../assets/local/sale/complaint_record-form-validate.js?ts=" + Math.random() + "' type='text/javascript'></\script>");
+        </script>
+        <!--<script src="../../assets/local/ycoa.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale/complaint_record.js" type="text/javascript"></script>-->
+        <!--<script src="../../assets/local/sale/complaint_record-form-validate.js" type="text/javascript"></script>-->
+        <script src="../../assets/local/basePermit.js" type="text/javascript"></script>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+.add_upload_btn{position: relative;overflow: hidden;margin-right: 4px;display:inline-block;*display:inline;padding:4px 10px 4px;font-size:14px;line-height:18px;*line-height:20px;color:#fff;text-align:center;vertical-align:middle;cursor:pointer;background-color:#5bb75b;border:1px solid #cccccc;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.add_upload_btn input {position: absolute;top: 0; right: 0;margin: 0;border: solid transparent;opacity: 0;filter:alpha(opacity=0); cursor: pointer;}
+.add_upload_progress { position:relative; margin-left:100px; margin-top:-24px; width:200px;padding: 1px; border-radius:3px; display:none}
+.add_upload_bar {background-color: green; display:block; width:0%; height:20px; border-radius: 3px; }
+.add_upload_percent { position:absolute; height:20px; display:inline-block; top:3px; left:2%; color:#fff }
+.add_upload_files{height:22px; line-height:22px; margin:10px 0}
+
+.edit_upload_btn{position: relative;overflow: hidden;margin-right: 4px;display:inline-block;*display:inline;padding:4px 10px 4px;font-size:14px;line-height:18px;*line-height:20px;color:#fff;text-align:center;vertical-align:middle;cursor:pointer;background-color:#5bb75b;border:1px solid #cccccc;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.edit_upload_btn input {position: absolute;top: 0; right: 0;margin: 0;border: solid transparent;opacity: 0;filter:alpha(opacity=0); cursor: pointer;}
+.edit_upload_progress { position:relative; margin-left:100px; margin-top:-24px; width:200px;padding: 1px; border-radius:3px; display:none}
+.edit_upload_bar {background-color: green; display:block; width:0%; height:20px; border-radius: 3px; }
+.edit_upload_percent { position:absolute; height:20px; display:inline-block; top:3px; left:2%; color:#fff }
+.edit_upload_files{height:22px; line-height:22px; margin:10px 0}

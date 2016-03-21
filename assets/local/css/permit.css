@@ -1,0 +1,33 @@
+.permit_main{width:100%;border: solid 1px #ececec;}
+.jstree_dept{width: 20%;border-right: solid 1px #ececec;float: left;overflow-y: auto;overflow-x: hidden;}
+.rolelist_items{width: 30%;border-right: solid 1px #ececec;float: left;overflow-y: auto;overflow-x: hidden;}
+.rolelist_items .role_text{float: left;height: 25px;text-align: center;line-height: 25px;margin: 2px 3px;padding: 0px 5px;cursor: pointer;}
+.rolelist_items .role_text:hover{background: #f7f7f7;color: black;}
+.rolelist_items .checked{background: #d64635;color: white;}
+.rolelist_items .checked:hover{background: #d64635;color: white;}
+.rolelist_items .last{clear: both;}
+
+.permitlist_items{width: 50%;float: left;overflow-y: auto;overflow-x: hidden;}
+.permitlist_items table{width: 100%;}
+.permitlist_items table tr{border-top: solid 1px #f7f7f7;}
+.permitlist_items table tr td{border-left: solid 1px #f7f7f7;}
+.permitlist_items table tr td:first-child{border-left: none;width: 33.3%;}
+.permitlist_items table tr td{border-left: solid 1px #f7f7f7;text-align: center;min-height: 30px;}
+.permitlist_items table tr td:first-child{border-left: none;}
+.permitlist_items table tr td div{height: 30px;border-bottom: solid 1px #f7f7f7;line-height: 30px;}
+.permitlist_items table tr td div:last-child{border-bottom: none;}
+.permitlist_items table tr td div i{margin-right: 5px;}
+.permitlist_items table tr td table{border: none;}
+.permitlist_items table tr td table tr:first-child{border-top: none;}
+.permitlist_items table tr td table tr td{height: 30px;line-height: 30px;width: 50%;}
+.permitlist_items .menus_text{height: 25px;width: auto; text-align: center;line-height: 25px;margin: 2px 3px;padding: 0px 5px;cursor: pointer;}
+.permitlist_items .menus_text:hover{background: #f7f7f7;color: black;}
+.permitlist_items .checked{background: #d64635;color: white;}
+.permitlist_items .checked:hover{background: #e26a6a;color: white;}
+
+.permit_tools{height: 40px;width: 200px;line-height: 40px;}
+.permit_tools .permit_btn{height: 30px;width: 70px;float: left;}
+.permit_tools .permit_checkall{}
+.permit_tools .permit_uncheckall{}
+
+/****/
